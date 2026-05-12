@@ -1,0 +1,102 @@
+:root {
+    --color-fondo: #0d1b2a;
+    --color-primario: #e0e1dd;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    background-color: var(--color-fondo);
+    color: var(--color-primario);
+    margin: 15px;
+    line-height: 1.24;
+    text-align: center;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+h1 {
+    text-align: center;
+    font-weight: bold;
+    padding: 12px;
+    margin: 20px;
+}
+
+#banner {
+    background-color: #424e5a;
+    padding: 15px;
+}
+
+#banner a {
+    color: #e0e1dd;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 10px 20px;
+}
+
+#banner a:hover {
+    color: rgb(104, 179, 223);
+    font-weight: bold;
+}
+
+#banner ul {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+}
+
+:is(#proyecto1, #proyecto2, #proyecto3, #proyecto4, #proyecto5):active {
+    background-color: #182b41;
+}
+
+#proyecto1, #proyecto2, #proyecto3, #proyecto4, #proyecto5 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e0e1dd;
+    box-shadow: 0 0 10px #000000;
+}
+
+.contenedor-cajas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    padding: 20px;
+}
+
+#Recursos, #Equipo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    padding: 20px;
+    gap: 20px;
+    border-radius: 8px;
+    border: 1px solid #e0e1dd;
+    box-shadow: 0 0 10px #000000;
+}
+
+ul {
+    list-style-position: inside;
+    list-style: none;
+    padding-left: 0;
+    text-align: center;
+}
+
+a {
+    color: #e0e1dd;
+}
+
+button:focus {
+    outline: 2px solid red;
+}

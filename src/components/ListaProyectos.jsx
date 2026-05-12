@@ -1,10 +1,10 @@
 
 import { useState } from 'react'
-import { obtenerProyectos } from '../services/proyectoService'
+import  proyectoService  from '../services/proyectoService'
 
 function ListaProyectos() {
 
-  const [proyectos, setProyectos] = useState(obtenerProyectos())
+  const [proyectos, setProyectos] = useState(proyectoService.obtenerProyectos())
 
   const colorEstado = (estado) => {
     if (estado === 'activo')    return 'badge badge-teal'

@@ -1,0 +1,145 @@
+:root {
+    --color-primario:   #1a3a6e;
+    --color-secundario: #f0c040;
+    --color-fondo:      #f0f0f0;
+    --color-blanco:     #ffffff;
+    --color-texto:      #333333;
+    --fuente:           Arial, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--fuente);
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}
+
+header {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+header p {
+    font-size: 13px;
+    color: #cccccc;
+    margin-bottom: 12px;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: var(--color-blanco);
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+}
+
+nav a:hover {
+    background-color: var(--color-secundario);
+    color: var(--color-primario);
+}
+
+nav a:focus {
+    outline: 2px solid var(--color-secundario);
+}
+
+nav a:active {
+    background-color: #c8a030;
+}
+
+.nav-activo {
+    background-color: var(--color-secundario);
+    color: var(--color-primario);
+    font-weight: bold;
+}
+
+main {
+    padding: 40px 20px;
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+section {
+    background-color: var(--color-blanco);
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 2px 2px 10px #cccccc;
+}
+
+section h2 {
+    font-size: 20px;
+    color: var(--color-primario);
+    border-bottom: 2px solid var(--color-secundario);
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+}
+
+#tarjeta-perfil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+#tarjeta-perfil img {
+    border-radius: 50%;
+    border: 3px solid var(--color-primario);
+}
+
+#tarjeta-perfil h3 {
+    font-size: 20px;
+    color: var(--color-primario);
+}
+
+.texto {
+    font-size: 14px;
+    color: #555555;
+}
+
+footer {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    text-align: center;
+    padding: 20px;
+}
+
+footer p {
+    font-size: 12px;
+    color: #cccccc;
+    margin-bottom: 10px;
+}
+
+footer nav a {
+    color: #cccccc;
+}
+
+footer nav a:hover {
+    color: var(--color-primario);
+    background-color: var(--color-secundario);
+}
+
+.hiper {
+    color: var(--color-secundario) !important;
+    font-weight: bold;
+}

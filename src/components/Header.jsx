@@ -1,4 +1,4 @@
-import Nav from './Nav'; // Importamos el Nav para mantener tu estructura
+import Nav from './Nav';
 
 const Header = () => {
   return (
@@ -7,7 +7,7 @@ const Header = () => {
       <p style={{ fontSize: '1.1rem', letterSpacing: '0.5px', opacity: 0.9 }}>
         Explora los proyectos educativos y tutorías disponibles.
       </p>
-      <Nav /> {/* Aquí usamos el componente Nav */}
+      <Nav />
     </header>
   );
 };

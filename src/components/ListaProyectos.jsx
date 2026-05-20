@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import proyectoService from '../services/proyectoService'
+import ProyectoCard from './ProyectoCard';
+import DetalleProyecto from './DetalleProyecto';
+import FormularioProyecto from './FormularioProyecto';
 
 function ListaProyectos() {
 

@@ -173,6 +173,83 @@ footer {
     margin-top: 40px;
 }
 
+/* ── Cards ─────────────────────────────────────── */
+.lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.card {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 1.25rem;
+  width: 280px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.card__titulo {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.card__categoria {
+  color: #64748b;
+  margin: 0 0 0.75rem 0;
+  font-size: 0.9rem;
+}
+
+.card__acciones {
+  margin-top: 1rem;
+  display: flex;
+  gap: 8px;
+}
+
+/* ── Badges ─────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.badge-teal  { background: #0d9488; color: #fff; } /* Activo     */
+.badge-amber { background: #d97706; color: #fff; } /* Pausado    */
+.badge-gray  { background: #9ca3af; color: #fff; } /* Finalizado */
+.badge-blue  { background: #2563eb; color: #fff; } /* Pendiente  */
+
+/* ── Botones ─────────────────────────────────────── */
+.btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.btn--detalle  { background: #2563eb; color: #fff; }
+.btn--eliminar { background: #dc2626; color: #fff; }
+
+/* ── Buscador ─────────────────────────────────────── */
+.buscador {
+  margin: 1rem 0;
+}
+
+.buscador input {
+  padding: 8px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 360px;
+  font-size: 0.9rem;
+}
+
+
 @media (max-width: 768px) {
     .explorador-proyectos {
         grid-template-columns: 1fr;
@@ -187,3 +264,6 @@ footer {
         height: 200px;
     }
 }
+
+
+

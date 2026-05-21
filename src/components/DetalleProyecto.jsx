@@ -11,10 +11,10 @@ const DetalleProyecto = ({ proyecto, volverALista }) => {
     <div className="card" style={{ width: '100%' }}>
 
       <button
+        className="btn btn--volver"
         onClick={volverALista}
-        style={{ marginBottom: '15px' }}
       >
-        Volver a la lista
+        ← Volver a la lista
       </button>
 
       <h2>{titulo}</h2>

@@ -17,7 +17,6 @@ function ListaProyectos() {
     descParrafo2: ''
   })
 
-  // REQUISITO PARTE 2: Desestructuración 
   const { titulo, categoria, activo, descParrafo1, descParrafo2 } = nuevoProyecto;
 
   const manejarBusqueda = (evento) => {
@@ -50,8 +49,8 @@ function ListaProyectos() {
       categoria,
       estado: activo ? 'Activo' : 'Inactivo',
       descripcion: [descParrafo1, descParrafo2],
-      recursos: [{ nombre: "Documento de Inicio", enlace: "#" }], // Valor genérico devuelto
-      equipo: [{ nombre: "Tutor asignado", rol: "Coordinador" }]  // Valor genérico devuelto
+      recursos: [{ nombre: "Documento de Inicio", enlace: "#" }],
+      equipo: [{ nombre: "Tutor asignado", rol: "Coordinador" }] 
     }
 
     proyectoService.agregarProyecto(proyecto)
@@ -71,7 +70,6 @@ function ListaProyectos() {
     <main>
       <h1>Proyectos Educativos</h1>
       
-      {/* Renderizado Condicional */}
       {proyectoSeleccionado ? (
         
         <DetalleProyecto 
@@ -113,7 +111,6 @@ function ListaProyectos() {
             />
           </div>
 
-          {/* Refactorizacion del map con Props */}
           <div className="lista" style={{ marginTop: '20px' }}>
             {proyectos.map((proyecto) => (
               <ProyectoCard 

@@ -12,13 +12,13 @@ function ListaProyectos() {
   const [nuevoProyecto, setNuevoProyecto] = useState({
     titulo: '',
     categoria: '',
-    estado: 'Activo',
+    activo: true,
     descParrafo1: '',
     descParrafo2: ''
   })
 
   // REQUISITO PARTE 2: Desestructuración 
-  const { titulo, categoria, estado, descParrafo1, descParrafo2 } = nuevoProyecto;
+  const { titulo, categoria, activo, descParrafo1, descParrafo2 } = nuevoProyecto;
 
   const manejarBusqueda = (evento) => {
     const texto = evento.target.value
@@ -34,10 +34,10 @@ function ListaProyectos() {
   }
 
   const manejarCambio = (evento) => {
-    const { name, value } = evento.target
+    const { name, value, type, checked } = evento.target
     setNuevoProyecto({
       ...nuevoProyecto,
-      [name]: value
+      [name]: type === 'checkbox' ? checked : value
     })
   }
 
@@ -46,9 +46,9 @@ function ListaProyectos() {
 
     const proyecto = {
       id: Date.now(),
-      titulo,      
-      categoria,   
-      estado,      
+      titulo,
+      categoria,
+      estado: activo ? 'Activo' : 'Inactivo',
       descripcion: [descParrafo1, descParrafo2],
       recursos: [{ nombre: "Documento de Inicio", enlace: "#" }], // Valor genérico devuelto
       equipo: [{ nombre: "Tutor asignado", rol: "Coordinador" }]  // Valor genérico devuelto
@@ -61,7 +61,7 @@ function ListaProyectos() {
     setNuevoProyecto({
       titulo: '',
       categoria: '',
-      estado: 'Activo',
+      activo: true,
       descParrafo1: '',
       descParrafo2: ''
     })
@@ -82,14 +82,18 @@ function ListaProyectos() {
       ) : (
         <>
           <form onSubmit={manejarAgregar} className="buscador" style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '20px' }}>
-            <div style={{ display: 'flex', gap: '10px' }}>
+            <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
               <input name="titulo" value={titulo} onChange={manejarCambio} placeholder="Título del proyecto" required />
               <input name="categoria" value={categoria} onChange={manejarCambio} placeholder="Categoría" required />
-              <select name="estado" value={estado} onChange={manejarCambio}>
-                <option value="Activo">Activo</option>
-                <option value="Pendiente">Pendiente</option>
-                <option value="Finalizado">Finalizado</option>
-              </select>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                <input
+                  type="checkbox"
+                  name="activo"
+                  checked={activo}
+                  onChange={manejarCambio}
+                />
+                Activo
+              </label>
             </div>
             
             <div style={{ display: 'flex', gap: '10px' }}>

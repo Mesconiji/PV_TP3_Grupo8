@@ -90,7 +90,7 @@ function ListaProyectos() {
     })
   }
 
-return (
+  return (
     <main>
       <h1>Proyectos Educativos</h1>
       

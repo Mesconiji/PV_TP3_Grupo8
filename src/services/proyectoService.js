@@ -6,6 +6,7 @@ const proyectoService = (() => {
             titulo: "Tutoría de Álgebra",
             categoria: "Matemática",
             estado: "Activo",
+            visible: true,
             descripcion: [
                 "Este proyecto busca nivelar a los estudiantes de primer año en los conceptos fundamentales del álgebra lineal.",
                 "Se realizarán encuentros presenciales con prácticas intensivas para los exámenes."
@@ -25,6 +26,7 @@ const proyectoService = (() => {
             titulo: "Apoyo en Inglés Técnico",
             categoria: "Idiomas",
             estado: "Activo",
+            visible: true,
             descripcion: [
                 "Clases conversacionales orientadas a la lectura de documentación técnica informática.",
                 "Se analizarán textos reales de tecnologías como React y Node.js."
@@ -42,6 +44,7 @@ const proyectoService = (() => {
             titulo: "Proyecto Física I",
             categoria: "Física",
             estado: "Pendiente",
+            visible: true,
             descripcion: [
                 "Resolución de problemas de cinemática y dinámica.",
                 "Uso de simuladores interactivos para comprender los fenómenos físicos."
@@ -60,6 +63,7 @@ const proyectoService = (() => {
             titulo: "Laboratorio de Programación",
             categoria: "Informática",
             estado: "Finalizado",
+            visible: true,
             descripcion: [
                 "Desarrollo de aplicaciones web estáticas utilizando HTML, CSS y JavaScript básico.",
                 "Proyecto final integrador con presentación grupal."
@@ -77,6 +81,7 @@ const proyectoService = (() => {
             titulo: "Red de Tutorías Solidarias",
             categoria: "Educación",
             estado: "Activo",
+            visible: true,
             descripcion: [
                 "Plataforma central para organizar y distribuir los horarios de todas las tutorías.",
                 "Mantenimiento del sistema y alta de nuevos usuarios."
@@ -91,38 +96,36 @@ const proyectoService = (() => {
     ];
 
     const obtenerProyectos = () => {
-
         return [...proyectos];
+    };
 
+    const obtenerProyectosActivos = () => {
+        return proyectos.filter(proyecto => proyecto.visible === true);
     };
 
     const agregarProyecto = (nuevoProyecto) => {
-
         proyectos.push(nuevoProyecto);
-
     };
 
     const eliminarProyecto = (id) => {
-
-        proyectos = proyectos.filter(
-            proyecto => proyecto.id !== id
-        );
-
+        const proyecto = proyectos.find(p => p.id === id);
+        if (proyecto) {
+            proyecto.visible = false;
+        }
     };
 
     const buscarProyecto = (texto) => {
-
         return proyectos.filter(
             proyecto =>
                 proyecto.titulo
                     .toLowerCase()
                     .includes(texto.toLowerCase())
         );
-
     };
 
     return {
         obtenerProyectos,
+        obtenerProyectosActivos,
         agregarProyecto,
         eliminarProyecto,
         buscarProyecto

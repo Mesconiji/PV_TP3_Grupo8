@@ -1,10 +1,8 @@
-// src/components/ProyectoCard.jsx
 
 const ProyectoCard = ({ proyecto, manejarEliminar, manejarVerDetalle }) => {
-  // Desestructuración del objeto proyecto
+
   const { titulo, categoria, estado, id } = proyecto;
 
-  // El badge cambia de clase según el estado del proyecto
   const badgeClase = estado === "Activo" ? "badge-teal" : "badge-gray";
 
   return (
@@ -12,7 +10,6 @@ const ProyectoCard = ({ proyecto, manejarEliminar, manejarVerDetalle }) => {
       <h2 className="card__titulo">{titulo}</h2>
       <p className="card__categoria">{categoria}</p>
 
-      {/* ÚNICO CAMBIO: Comillas invertidas antes de badge y después de la llave */}
       <span className={`badge ${badgeClase}`}>{estado}</span>
 
       <div className="card__acciones">

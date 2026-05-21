@@ -102,13 +102,19 @@ const proyectoService = (() => {
 
     };
 
-    const eliminarProyecto = (id) => {
+   const eliminarProyecto = (id) => {
 
-        proyectos = proyectos.filter(
-            proyecto => proyecto.id !== id
-        );
+    const indice = proyectos.findIndex(
+        proyecto => proyecto.id === id
+    );
 
-    };
+    if (indice !== -1) {
+
+        proyectos.splice(indice, 1);
+
+    }
+
+};
 
     const buscarProyecto = (texto) => {
 

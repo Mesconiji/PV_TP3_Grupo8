@@ -96,7 +96,7 @@ const proyectoService = (() => {
     ];
 
     const obtenerProyectos = () => {
-        return [...proyectos];
+        return proyectos.filter(proyecto => proyecto.visible === true).map(p => ({ ...p }));
     };
 
     const obtenerProyectosActivos = () => {
@@ -104,7 +104,7 @@ const proyectoService = (() => {
     };
 
     const agregarProyecto = (nuevoProyecto) => {
-        proyectos.push(nuevoProyecto);
+        proyectos.push({ ...nuevoProyecto, visible: true });
     };
 
     const eliminarProyecto = (id) => {
@@ -117,6 +117,7 @@ const proyectoService = (() => {
     const buscarProyecto = (texto) => {
         return proyectos.filter(
             proyecto =>
+                proyecto.visible === true &&
                 proyecto.titulo
                     .toLowerCase()
                     .includes(texto.toLowerCase())

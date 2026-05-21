@@ -2,7 +2,6 @@ import { useState } from 'react'
 import proyectoService from '../services/proyectoService'
 import ProyectoCard from './ProyectoCard';
 import DetalleProyecto from './DetalleProyecto';
-import FormularioProyecto from './FormularioProyecto';
 
 function ListaProyectos() {
 
@@ -16,51 +15,23 @@ function ListaProyectos() {
     estado: 'Activo'
   })
 
-  const colorEstado = (estado) => {
-    if (estado === 'Activo') return 'badge badge-teal'
-    if (estado === 'Pausado') return 'badge badge-amber'
-    if (estado === 'Finalizado') return 'badge badge-gray'
-    if (estado === 'Pendiente') return 'badge badge-blue'
-
-    return 'badge badge-blue'
-  }
+  const { titulo, categoria, estado } = nuevoProyecto;
 
   const manejarBusqueda = (evento) => {
     const texto = evento.target.value
-
     setBusqueda(texto)
-
     const proyectosFiltrados = proyectoService.buscarProyecto(texto)
-
     setProyectos(proyectosFiltrados)
   }
 
   const manejarEliminar = (id) => {
     proyectoService.eliminarProyecto(id)
-
     const proyectosActualizados = proyectoService.buscarProyecto(busqueda)
-
     setProyectos(proyectosActualizados)
   }
 
-  const agregarNuevoProyecto = (datos) => {
-    const nuevoProyecto = {
-      id: Date.now(),
-      titulo: datos.titulo,
-      categoria: datos.categoria,
-      estado: datos.estado,
-      descripcion: ["Descripción pendiente.", "Falta definir detalles."],
-      recursos: [{ nombre: "Documento de Inicio", enlace: "#" }],
-      equipo: [{ nombre: "Tutor asignado", rol: "Coordinador" }]
-    };
-    
-    proyectoService.agregarProyecto(nuevoProyecto);
-    setProyectos(proyectoService.obtenerProyectos());
-  };
-
   const manejarCambio = (evento) => {
     const { name, value } = evento.target
-
     setNuevoProyecto({
       ...nuevoProyecto,
       [name]: value
@@ -72,15 +43,16 @@ function ListaProyectos() {
 
     const proyecto = {
       id: Date.now(),
-      titulo: nuevoProyecto.titulo,
-      categoria: nuevoProyecto.categoria,
-      estado: nuevoProyecto.estado
+      titulo,
+      categoria,
+      estado,
+      descripcion: ["Descripción pendiente.", "Falta definir detalles."],
+      recursos: [{ nombre: "Documento de Inicio", enlace: "#" }],
+      equipo: [{ nombre: "Tutor asignado", rol: "Coordinador" }]
     }
 
     proyectoService.agregarProyecto(proyecto)
-
     const proyectosActualizados = proyectoService.buscarProyecto(busqueda)
-
     setProyectos(proyectosActualizados)
 
     setNuevoProyecto({
@@ -94,7 +66,7 @@ function ListaProyectos() {
     <main>
       <h1>Proyectos Educativos</h1>
       
-      {/*Renderizado Condicional*/}
+      {/* Renderizado Condicional */}
       {proyectoSeleccionado ? (
         
         <DetalleProyecto 
@@ -104,9 +76,18 @@ function ListaProyectos() {
         
       ) : (
         <>
-          {/*Formulario y Buscador*/}
-          <FormularioProyecto alAgregar={agregarNuevoProyecto} />
-          
+          {/* EL FORMULARIO VISIBLE EN PANTALLA */}
+          <form onSubmit={manejarAgregar} className="buscador" style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
+            <input name="titulo" value={titulo} onChange={manejarCambio} placeholder="Título del proyecto" required />
+            <input name="categoria" value={categoria} onChange={manejarCambio} placeholder="Categoría" required />
+            <select name="estado" value={estado} onChange={manejarCambio}>
+              <option value="Activo">Activo</option>
+              <option value="Pendiente">Pendiente</option>
+              <option value="Finalizado">Finalizado</option>
+            </select>
+            <button type="submit">Agregar Proyecto</button>
+          </form>
+
           <div className="buscador" style={{ marginTop: '20px' }}>
             <input 
               type="text" 
@@ -116,7 +97,7 @@ function ListaProyectos() {
             />
           </div>
 
-          {/*Refactorizacion del map con Props*/}
+          {/* Refactorizacion del map con Props */}
           <div className="lista" style={{ marginTop: '20px' }}>
             {proyectos.map((proyecto) => (
               <ProyectoCard 

@@ -12,10 +12,13 @@ function ListaProyectos() {
   const [nuevoProyecto, setNuevoProyecto] = useState({
     titulo: '',
     categoria: '',
-    estado: 'Activo'
+    estado: 'Activo',
+    descParrafo1: '',
+    descParrafo2: ''
   })
 
-  const { titulo, categoria, estado } = nuevoProyecto;
+  // REQUISITO PARTE 2: Desestructuración 
+  const { titulo, categoria, estado, descParrafo1, descParrafo2 } = nuevoProyecto;
 
   const manejarBusqueda = (evento) => {
     const texto = evento.target.value
@@ -43,12 +46,12 @@ function ListaProyectos() {
 
     const proyecto = {
       id: Date.now(),
-      titulo,
-      categoria,
-      estado,
-      descripcion: ["Descripción pendiente.", "Falta definir detalles."],
-      recursos: [{ nombre: "Documento de Inicio", enlace: "#" }],
-      equipo: [{ nombre: "Tutor asignado", rol: "Coordinador" }]
+      titulo,      
+      categoria,   
+      estado,      
+      descripcion: [descParrafo1, descParrafo2],
+      recursos: [{ nombre: "Documento de Inicio", enlace: "#" }], // Valor genérico devuelto
+      equipo: [{ nombre: "Tutor asignado", rol: "Coordinador" }]  // Valor genérico devuelto
     }
 
     proyectoService.agregarProyecto(proyecto)
@@ -58,7 +61,9 @@ function ListaProyectos() {
     setNuevoProyecto({
       titulo: '',
       categoria: '',
-      estado: 'Activo'
+      estado: 'Activo',
+      descParrafo1: '',
+      descParrafo2: ''
     })
   }
 
@@ -76,16 +81,23 @@ function ListaProyectos() {
         
       ) : (
         <>
-          {/* EL FORMULARIO VISIBLE EN PANTALLA */}
-          <form onSubmit={manejarAgregar} className="buscador" style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
-            <input name="titulo" value={titulo} onChange={manejarCambio} placeholder="Título del proyecto" required />
-            <input name="categoria" value={categoria} onChange={manejarCambio} placeholder="Categoría" required />
-            <select name="estado" value={estado} onChange={manejarCambio}>
-              <option value="Activo">Activo</option>
-              <option value="Pendiente">Pendiente</option>
-              <option value="Finalizado">Finalizado</option>
-            </select>
-            <button type="submit">Agregar Proyecto</button>
+          <form onSubmit={manejarAgregar} className="buscador" style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '20px' }}>
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <input name="titulo" value={titulo} onChange={manejarCambio} placeholder="Título del proyecto" required />
+              <input name="categoria" value={categoria} onChange={manejarCambio} placeholder="Categoría" required />
+              <select name="estado" value={estado} onChange={manejarCambio}>
+                <option value="Activo">Activo</option>
+                <option value="Pendiente">Pendiente</option>
+                <option value="Finalizado">Finalizado</option>
+              </select>
+            </div>
+            
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <input name="descParrafo1" value={descParrafo1} onChange={manejarCambio} placeholder="Descripción (Párrafo 1)" required />
+              <input name="descParrafo2" value={descParrafo2} onChange={manejarCambio} placeholder="Descripción (Párrafo 2)" required />
+            </div>
+
+            <button type="submit" style={{ alignSelf: 'flex-start' }}>AGREGAR</button>
           </form>
 
           <div className="buscador" style={{ marginTop: '20px' }}>

@@ -1,14 +1,28 @@
-import { useState } from 'react'
-import proyectoService from '../services/proyectoService'
-import ProyectoCard from './ProyectoCard'
-import DetalleProyecto from './DetalleProyecto'
-import FormularioProyecto from './FormularioProyecto'
 
 function ListaProyectos() {
 
   const [proyectos, setProyectos] = useState(proyectoService.obtenerProyectos())
   const [busqueda, setBusqueda] = useState('')
   const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null)
+  const [fechaHora, setFechaHora] = useState('')
+
+
+  useEffect(() => {
+
+  const ahora = new Date()
+
+  const fechaFormateada =
+    ahora.toLocaleDateString() +
+    " a las " +
+    ahora.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit"
+    }) +
+    " hs."
+
+  setFechaHora(fechaFormateada)
+
+}, [proyectos])
 
   const colorEstado = (estado) => {
     if (estado === 'Activo') return 'badge badge-teal'
@@ -48,6 +62,7 @@ function ListaProyectos() {
   return (
     <main>
       <h1>Proyectos Educativos</h1>
+      <RegistroActividad fechaHora={fechaHora} />
 
       {/* Renderizado Condicional */}
       {proyectoSeleccionado ? (
@@ -89,3 +104,4 @@ function ListaProyectos() {
 }
 
 export default ListaProyectos
+

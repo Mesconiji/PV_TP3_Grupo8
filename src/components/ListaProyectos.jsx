@@ -1,121 +1,82 @@
 import { useState } from 'react'
 import proyectoService from '../services/proyectoService'
-import ProyectoCard from './ProyectoCard';
-import DetalleProyecto from './DetalleProyecto';
+import ProyectoCard from './ProyectoCard'
+import DetalleProyecto from './DetalleProyecto'
+import FormularioProyecto from './FormularioProyecto'
 
 function ListaProyectos() {
 
   const [proyectos, setProyectos] = useState(proyectoService.obtenerProyectos())
   const [busqueda, setBusqueda] = useState('')
-  const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
+  const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null)
 
-  const [nuevoProyecto, setNuevoProyecto] = useState({
-    titulo: '',
-    categoria: '',
-    activo: true,
-    descParrafo1: '',
-    descParrafo2: ''
-  })
-
-  const { titulo, categoria, activo, descParrafo1, descParrafo2 } = nuevoProyecto;
+  const colorEstado = (estado) => {
+    if (estado === 'Activo') return 'badge badge-teal'
+    if (estado === 'Pausado') return 'badge badge-amber'
+    if (estado === 'Finalizado') return 'badge badge-gray'
+    if (estado === 'Pendiente') return 'badge badge-blue'
+    return 'badge badge-blue'
+  }
 
   const manejarBusqueda = (evento) => {
     const texto = evento.target.value
     setBusqueda(texto)
-    const proyectosFiltrados = proyectoService.buscarProyecto(texto)
-    setProyectos(proyectosFiltrados)
+    setProyectos(proyectoService.buscarProyecto(texto))
   }
 
   const manejarEliminar = (id) => {
     proyectoService.eliminarProyecto(id)
-    const proyectosActualizados = proyectoService.buscarProyecto(busqueda)
-    setProyectos(proyectosActualizados)
+    setProyectos(proyectoService.buscarProyecto(busqueda))
   }
 
-  const manejarCambio = (evento) => {
-    const { name, value, type, checked } = evento.target
-    setNuevoProyecto({
-      ...nuevoProyecto,
-      [name]: type === 'checkbox' ? checked : value
-    })
-  }
-
-  const manejarAgregar = (evento) => {
-    evento.preventDefault()
-
+  // Recibe los datos desde FormularioProyecto y actualiza la lista
+  const agregarNuevoProyecto = (datos) => {
     const proyecto = {
       id: Date.now(),
-      titulo,
-      categoria,
-      estado: activo ? 'Activo' : 'Inactivo',
-      descripcion: [descParrafo1, descParrafo2],
+      titulo: datos.titulo,
+      categoria: datos.categoria,
+      estado: datos.estado,
+      descripcion: ["Descripción pendiente.", "Falta definir detalles."],
       recursos: [{ nombre: "Documento de Inicio", enlace: "#" }],
-      equipo: [{ nombre: "Tutor asignado", rol: "Coordinador" }] 
+      equipo: [{ nombre: "Tutor asignado", rol: "Coordinador" }]
     }
 
     proyectoService.agregarProyecto(proyecto)
-    const proyectosActualizados = proyectoService.buscarProyecto(busqueda)
-    setProyectos(proyectosActualizados)
-
-    setNuevoProyecto({
-      titulo: '',
-      categoria: '',
-      activo: true,
-      descParrafo1: '',
-      descParrafo2: ''
-    })
+    setProyectos(proyectoService.obtenerProyectos())
   }
 
   return (
     <main>
       <h1>Proyectos Educativos</h1>
-      
+
+      {/* Renderizado Condicional */}
       {proyectoSeleccionado ? (
-        
-        <DetalleProyecto 
-          proyecto={proyectoSeleccionado} 
-          volverALista={() => setProyectoSeleccionado(null)} 
+
+        <DetalleProyecto
+          proyecto={proyectoSeleccionado}
+          volverALista={() => setProyectoSeleccionado(null)}
         />
-        
+
       ) : (
         <>
-          <form onSubmit={manejarAgregar} className="buscador" style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '20px' }}>
-            <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-              <input name="titulo" value={titulo} onChange={manejarCambio} placeholder="Título del proyecto" required />
-              <input name="categoria" value={categoria} onChange={manejarCambio} placeholder="Categoría" required />
-              <label style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                <input
-                  type="checkbox"
-                  name="activo"
-                  checked={activo}
-                  onChange={manejarCambio}
-                />
-                Activo
-              </label>
-            </div>
-            
-            <div style={{ display: 'flex', gap: '10px' }}>
-              <input name="descParrafo1" value={descParrafo1} onChange={manejarCambio} placeholder="Descripción (Párrafo 1)" required />
-              <input name="descParrafo2" value={descParrafo2} onChange={manejarCambio} placeholder="Descripción (Párrafo 2)" required />
-            </div>
-
-            <button type="submit" style={{ alignSelf: 'flex-start' }}>AGREGAR</button>
-          </form>
+          {/* Formulario y Buscador */}
+          <FormularioProyecto alAgregar={agregarNuevoProyecto} />
 
           <div className="buscador" style={{ marginTop: '20px' }}>
-            <input 
-              type="text" 
-              placeholder="Buscar proyecto por titulo" 
-              value={busqueda} 
-              onChange={manejarBusqueda} 
+            <input
+              type="text"
+              placeholder="Buscar proyecto por titulo"
+              value={busqueda}
+              onChange={manejarBusqueda}
             />
           </div>
 
+          {/* Refactorizacion del map con Props */}
           <div className="lista" style={{ marginTop: '20px' }}>
             {proyectos.map((proyecto) => (
-              <ProyectoCard 
-                key={proyecto.id} 
-                proyecto={proyecto} 
+              <ProyectoCard
+                key={proyecto.id}
+                proyecto={proyecto}
                 manejarEliminar={manejarEliminar}
                 manejarVerDetalle={setProyectoSeleccionado}
               />
@@ -124,7 +85,7 @@ function ListaProyectos() {
         </>
       )}
     </main>
-  );
+  )
 }
 
-export default ListaProyectos;
+export default ListaProyectos

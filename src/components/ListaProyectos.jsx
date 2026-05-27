@@ -1,4 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
+import proyectoService from '../services/proyectoService'
+import ProyectoCard from './ProyectoCard'
+import DetalleProyecto from './DetalleProyecto'
+import FormularioProyecto from './FormularioProyecto'
+import RegistroActividad from './RegistroActividad'
 
 function ListaProyectos() {
 
@@ -32,14 +37,6 @@ function ListaProyectos() {
 
   }, [proyectos])
 
-  const colorEstado = (estado) => {
-    if (estado === 'Activo') return 'badge badge-teal'
-    if (estado === 'Pausado') return 'badge badge-amber'
-    if (estado === 'Finalizado') return 'badge badge-gray'
-    if (estado === 'Pendiente') return 'badge badge-blue'
-    return 'badge badge-blue'
-  }
-
   const manejarBusqueda = (evento) => {
     const texto = evento.target.value
     setBusqueda(texto)
@@ -62,10 +59,13 @@ function ListaProyectos() {
       id: Date.now(),
       titulo: datos.titulo,
       categoria: datos.categoria,
-      estado: datos.estado,
-      descripcion: ["Descripción pendiente.", "Falta definir detalles."],
-      recursos: [{ nombre: "Documento de Inicio", enlace: "#" }],
-      equipo: [{ nombre: "Tutor asignado", rol: "Coordinador" }]
+      estado: datos.activo ? 'Activo' : 'Inactivo',
+      descripcion: [
+        datos.descParrafo1 || 'Descripción pendiente.',
+        datos.descParrafo2 || 'Falta definir detalles.'
+      ],
+      recursos: datos.nombreRecurso ? [{ nombre: datos.nombreRecurso, enlace: '#' }] : [{ nombre: 'Documento de Inicio', enlace: '#' }],
+      equipo: datos.nombreEquipo ? [{ nombre: datos.nombreEquipo, rol: datos.rolEquipo || 'Miembro' }] : [{ nombre: 'Tutor asignado', rol: 'Coordinador' }]
     }
 
     proyectoService.agregarProyecto(proyecto)

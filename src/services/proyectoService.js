@@ -107,28 +107,12 @@ const proyectoService = (() => {
         proyectos.push({ ...nuevoProyecto, visible: true });
     };
 
-<<<<<<< HEAD
-   const eliminarProyecto = (id) => {
-
-    const indice = proyectos.findIndex(
-        proyecto => proyecto.id === id
-    );
-
-    if (indice !== -1) {
-
-        proyectos.splice(indice, 1);
-
-    }
-
-};
-=======
     const eliminarProyecto = (id) => {
         const proyecto = proyectos.find(p => p.id === id);
         if (proyecto) {
             proyecto.visible = false;
         }
     };
->>>>>>> main
 
     const buscarProyecto = (texto) => {
         return proyectos.filter(

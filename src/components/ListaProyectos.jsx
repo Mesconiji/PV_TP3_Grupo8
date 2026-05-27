@@ -1,28 +1,36 @@
+import { useState, useEffect, useRef } from 'react'
 
 function ListaProyectos() {
 
   const [proyectos, setProyectos] = useState(proyectoService.obtenerProyectos())
+  const [proyectosFiltrados, setProyectosFiltrados] = useState(proyectoService.obtenerProyectos())
   const [busqueda, setBusqueda] = useState('')
   const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null)
-  const [fechaHora, setFechaHora] = useState('')
+  const [fechaHora, setFechaHora] = useState(null)
 
+  const esMontajeInicial = useRef(true)
 
   useEffect(() => {
 
-  const ahora = new Date()
+    if (esMontajeInicial.current) {
+      esMontajeInicial.current = false
+      return
+    }
 
-  const fechaFormateada =
-    ahora.toLocaleDateString() +
-    " a las " +
-    ahora.toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit"
-    }) +
-    " hs."
+    const ahora = new Date()
 
-  setFechaHora(fechaFormateada)
+    const fechaFormateada =
+      ahora.toLocaleDateString('es-AR') +
+      " a las " +
+      ahora.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit"
+      }) +
+      " hs."
 
-}, [proyectos])
+    setFechaHora(fechaFormateada)
+
+  }, [proyectos])
 
   const colorEstado = (estado) => {
     if (estado === 'Activo') return 'badge badge-teal'
@@ -35,15 +43,20 @@ function ListaProyectos() {
   const manejarBusqueda = (evento) => {
     const texto = evento.target.value
     setBusqueda(texto)
-    setProyectos(proyectoService.buscarProyecto(texto))
+    setProyectosFiltrados(proyectoService.buscarProyecto(texto))
   }
 
   const manejarEliminar = (id) => {
     proyectoService.eliminarProyecto(id)
-    setProyectos(proyectoService.buscarProyecto(busqueda))
+    const listaActualizada = proyectoService.obtenerProyectos()
+    setProyectos(listaActualizada)
+    setProyectosFiltrados(
+      busqueda
+        ? proyectoService.buscarProyecto(busqueda)
+        : listaActualizada
+    )
   }
 
-  // Recibe los datos desde FormularioProyecto y actualiza la lista
   const agregarNuevoProyecto = (datos) => {
     const proyecto = {
       id: Date.now(),
@@ -56,15 +69,21 @@ function ListaProyectos() {
     }
 
     proyectoService.agregarProyecto(proyecto)
-    setProyectos(proyectoService.obtenerProyectos())
+    const listaActualizada = proyectoService.obtenerProyectos()
+    setProyectos(listaActualizada)
+    setProyectosFiltrados(
+      busqueda
+        ? proyectoService.buscarProyecto(busqueda)
+        : listaActualizada
+    )
   }
 
   return (
     <main>
       <h1>Proyectos Educativos</h1>
-      <RegistroActividad fechaHora={fechaHora} />
 
-      {/* Renderizado Condicional */}
+      {fechaHora && <RegistroActividad fechaHora={fechaHora} />}
+
       {proyectoSeleccionado ? (
 
         <DetalleProyecto
@@ -74,7 +93,6 @@ function ListaProyectos() {
 
       ) : (
         <>
-          {/* Formulario y Buscador */}
           <FormularioProyecto alAgregar={agregarNuevoProyecto} />
 
           <div className="buscador" style={{ marginTop: '20px' }}>
@@ -86,9 +104,8 @@ function ListaProyectos() {
             />
           </div>
 
-          {/* Refactorizacion del map con Props */}
           <div className="lista" style={{ marginTop: '20px' }}>
-            {proyectos.map((proyecto) => (
+            {proyectosFiltrados.map((proyecto) => (
               <ProyectoCard
                 key={proyecto.id}
                 proyecto={proyecto}
@@ -104,4 +121,3 @@ function ListaProyectos() {
 }
 
 export default ListaProyectos
-

@@ -33,7 +33,7 @@ const DetalleProyecto = ({ proyecto, volverALista }) => {
       <ul>
         {recursos.map((recurso, index) => (
           <li key={index}>
-            <a href={recurso.enlace} target="_blank" rel="noreferrer">
+            <a href={recurso.enlace} >
               {recurso.nombre}
             </a>
           </li>

@@ -4,7 +4,6 @@ import Footer from './components/Footer';
 import './css/indexstyle.css';
 import './css/proyectostyle.css';
 import './css/detallestyle.css';
-import './css/perfilstyle.css';
 
 
 const App = () => {

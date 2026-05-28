@@ -5,7 +5,7 @@ import DetalleProyecto from './DetalleProyecto'
 import FormularioProyecto from './FormularioProyecto'
 import RegistroActividad from './RegistroActividad'
 
-function ListaProyectos() {
+const ListaProyectos = () => {
 
   const [proyectos, setProyectos] = useState(proyectoService.obtenerProyectos())
   const [proyectosFiltrados, setProyectosFiltrados] = useState(proyectoService.obtenerProyectos())
@@ -82,8 +82,7 @@ function ListaProyectos() {
     <main>
       <h1>Proyectos Educativos</h1>
 
-      {fechaHora && <RegistroActividad fechaHora={fechaHora} />}
-
+      
       {proyectoSeleccionado ? (
 
         <DetalleProyecto
@@ -116,6 +115,9 @@ function ListaProyectos() {
           </div>
         </>
       )}
+
+      {fechaHora && <RegistroActividad fechaHora={fechaHora} />}
+
     </main>
   )
 }

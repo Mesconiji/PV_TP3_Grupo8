@@ -13,12 +13,11 @@ const ListaProyectos = () => {
   const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null)
   const [fechaHora, setFechaHora] = useState(null)
 
-  const esMontajeInicial = useRef(true)
+  const esMontajeInicial = useRef(proyectos)
 
   useEffect(() => {
 
-    if (esMontajeInicial.current) {
-      esMontajeInicial.current = false
+    if (esMontajeInicial.current === proyectos) {
       return
     }
 

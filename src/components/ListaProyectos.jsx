@@ -37,7 +37,7 @@ const ListaProyectos = () => {
   }, [proyectos])
 
   const manejarBusqueda = (evento) => {
-    const texto = evento.target.value
+    const { value: texto } = evento.target
     setBusqueda(texto)
     setProyectosFiltrados(proyectoService.buscarProyecto(texto))
   }
@@ -54,17 +54,28 @@ const ListaProyectos = () => {
   }
 
   const agregarNuevoProyecto = (datos) => {
+    const {
+      titulo,
+      categoria,
+      activo,
+      descParrafo1,
+      descParrafo2,
+      nombreRecurso,
+      nombreEquipo,
+      rolEquipo
+    } = datos
+
     const proyecto = {
       id: Date.now(),
-      titulo: datos.titulo,
-      categoria: datos.categoria,
-      estado: datos.activo ? 'Activo' : 'Inactivo',
+      titulo,
+      categoria,
+      estado: activo ? 'Activo' : 'Inactivo',
       descripcion: [
-        datos.descParrafo1 || 'Descripción pendiente.',
-        datos.descParrafo2 || 'Falta definir detalles.'
+        descParrafo1 || 'Descripción pendiente.',
+        descParrafo2 || 'Falta definir detalles.'
       ],
-      recursos: datos.nombreRecurso ? [{ nombre: datos.nombreRecurso, enlace: '#' }] : [{ nombre: 'Documento de Inicio', enlace: '#' }],
-      equipo: datos.nombreEquipo ? [{ nombre: datos.nombreEquipo, rol: datos.rolEquipo || 'Miembro' }] : [{ nombre: 'Tutor asignado', rol: 'Coordinador' }]
+      recursos: nombreRecurso ? [{ nombre: nombreRecurso, enlace: '#' }] : [{ nombre: 'Documento de Inicio', enlace: '#' }],
+      equipo: nombreEquipo ? [{ nombre: nombreEquipo, rol: rolEquipo || 'Miembro' }] : [{ nombre: 'Tutor asignado', rol: 'Coordinador' }]
     }
 
     proyectoService.agregarProyecto(proyecto)
@@ -103,9 +114,9 @@ const ListaProyectos = () => {
           </div>
 
           <div className="lista" style={{ marginTop: '20px' }}>
-            {proyectosFiltrados.map((proyecto) => (
+            {proyectosFiltrados.map(({ id, ...proyecto }) => (
               <ProyectoCard
-                key={proyecto.id}
+                key={id}
                 proyecto={proyecto}
                 manejarEliminar={manejarEliminar}
                 manejarVerDetalle={setProyectoSeleccionado}

@@ -37,7 +37,7 @@ const ListaProyectos = () => {
   }, [proyectos])
 
   const manejarBusqueda = (evento) => {
-    const { value: texto } = evento.target
+    const texto = evento.target.value
     setBusqueda(texto)
     setProyectosFiltrados(proyectoService.buscarProyecto(texto))
   }
@@ -78,16 +78,6 @@ const ListaProyectos = () => {
       equipo: nombreEquipo ? [{ nombre: nombreEquipo, rol: rolEquipo || 'Miembro' }] : [{ nombre: 'Tutor asignado', rol: 'Coordinador' }]
     }
 
-    proyectoService.agregarProyecto(proyecto)
-    const listaActualizada = proyectoService.obtenerProyectos()
-    setProyectos(listaActualizada)
-    setProyectosFiltrados(
-      busqueda
-        ? proyectoService.buscarProyecto(busqueda)
-        : listaActualizada
-    )
-  }
-
   return (
     <main>
       <h1>Proyectos Educativos</h1>
@@ -114,9 +104,9 @@ const ListaProyectos = () => {
           </div>
 
           <div className="lista" style={{ marginTop: '20px' }}>
-            {proyectosFiltrados.map(({ id, ...proyecto }) => (
+            {proyectosFiltrados.map((proyecto) => (
               <ProyectoCard
-                key={id}
+                key={proyecto.id}
                 proyecto={proyecto}
                 manejarEliminar={manejarEliminar}
                 manejarVerDetalle={setProyectoSeleccionado}

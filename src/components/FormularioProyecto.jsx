@@ -39,6 +39,18 @@ const FormularioProyecto = ({ alAgregar }) => {
     })
   }
 
+    const {
+    titulo,
+    categoria,
+    activo,
+    descParrafo1,
+    descParrafo2,
+    nombreRecurso,
+    enlaceRecurso,
+    nombreEquipo,
+    rolEquipo
+  } = nuevoProyecto
+
   return (
     <form onSubmit={manejarSubmit} className="buscador" style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '20px' }}>
       <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', alignItems: 'center' }}>
@@ -46,7 +58,7 @@ const FormularioProyecto = ({ alAgregar }) => {
           type="text"
           name="titulo"
           placeholder="Titulo del proyecto"
-          value={nuevoProyecto.titulo}
+          value={titulo}
           onChange={manejarCambio}
           required
         />
@@ -55,7 +67,7 @@ const FormularioProyecto = ({ alAgregar }) => {
           type="text"
           name="categoria"
           placeholder="Categoría"
-          value={nuevoProyecto.categoria}
+          value={categoria}
           onChange={manejarCambio}
           required
         />
@@ -64,7 +76,7 @@ const FormularioProyecto = ({ alAgregar }) => {
           <input
             type="checkbox"
             name="activo"
-            checked={nuevoProyecto.activo}
+            checked={activo}
             onChange={manejarCambio}
           />
           Activo
@@ -76,7 +88,7 @@ const FormularioProyecto = ({ alAgregar }) => {
           type="text"
           name="descParrafo1"
           placeholder="Descripción (Párrafo 1)"
-          value={nuevoProyecto.descParrafo1}
+          value={descParrafo1}
           onChange={manejarCambio}
           required
         />
@@ -85,7 +97,7 @@ const FormularioProyecto = ({ alAgregar }) => {
           type="text"
           name="descParrafo2"
           placeholder="Descripción (Párrafo 2)"
-          value={nuevoProyecto.descParrafo2}
+          value={descParrafo2}
           onChange={manejarCambio}
           required
         />
@@ -96,7 +108,7 @@ const FormularioProyecto = ({ alAgregar }) => {
           type="text"
           name="nombreRecurso"
           placeholder="Nombre del recurso"
-          value={nuevoProyecto.nombreRecurso}
+          value={nombreRecurso}
           onChange={manejarCambio}
         />
 
@@ -104,7 +116,7 @@ const FormularioProyecto = ({ alAgregar }) => {
           type="text"
           name="enlaceRecurso"
           placeholder="Enlace del recurso"
-          value={nuevoProyecto.enlaceRecurso}
+          value={enlaceRecurso}
           onChange={manejarCambio}
         />
       </div>
@@ -114,7 +126,7 @@ const FormularioProyecto = ({ alAgregar }) => {
           type="text"
           name="nombreEquipo"
           placeholder="Nombre del integrante"
-          value={nuevoProyecto.nombreEquipo}
+          value={nombreEquipo}
           onChange={manejarCambio}
         />
 
@@ -122,7 +134,7 @@ const FormularioProyecto = ({ alAgregar }) => {
           type="text"
           name="rolEquipo"
           placeholder="Rol del integrante"
-          value={nuevoProyecto.rolEquipo}
+          value={rolEquipo}
           onChange={manejarCambio}
         />
       </div>

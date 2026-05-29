@@ -54,17 +54,28 @@ const ListaProyectos = () => {
   }
 
   const agregarNuevoProyecto = (datos) => {
+    const {
+      titulo,
+      categoria,
+      activo,
+      descParrafo1,
+      descParrafo2,
+      nombreRecurso,
+      nombreEquipo,
+      rolEquipo
+    } = datos
+
     const proyecto = {
       id: Date.now(),
-      titulo: datos.titulo,
-      categoria: datos.categoria,
-      estado: datos.activo ? 'Activo' : 'Inactivo',
+      titulo,
+      categoria,
+      estado: activo ? 'Activo' : 'Inactivo',
       descripcion: [
-        datos.descParrafo1 || 'Descripción pendiente.',
-        datos.descParrafo2 || 'Falta definir detalles.'
+        descParrafo1 || 'Descripción pendiente.',
+        descParrafo2 || 'Falta definir detalles.'
       ],
-      recursos: datos.nombreRecurso ? [{ nombre: datos.nombreRecurso, enlace: '#' }] : [{ nombre: 'Documento de Inicio', enlace: '#' }],
-      equipo: datos.nombreEquipo ? [{ nombre: datos.nombreEquipo, rol: datos.rolEquipo || 'Miembro' }] : [{ nombre: 'Tutor asignado', rol: 'Coordinador' }]
+      recursos: nombreRecurso ? [{ nombre: nombreRecurso, enlace: '#' }] : [{ nombre: 'Documento de Inicio', enlace: '#' }],
+      equipo: nombreEquipo ? [{ nombre: nombreEquipo, rol: rolEquipo || 'Miembro' }] : [{ nombre: 'Tutor asignado', rol: 'Coordinador' }]
     }
 
     proyectoService.agregarProyecto(proyecto)

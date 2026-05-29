@@ -78,6 +78,16 @@ const ListaProyectos = () => {
       equipo: nombreEquipo ? [{ nombre: nombreEquipo, rol: rolEquipo || 'Miembro' }] : [{ nombre: 'Tutor asignado', rol: 'Coordinador' }]
     }
 
+    proyectoService.agregarProyecto(proyecto)
+    const listaActualizada = proyectoService.obtenerProyectos()
+    setProyectos(listaActualizada)
+    setProyectosFiltrados(
+      busqueda
+        ? proyectoService.buscarProyecto(busqueda)
+        : listaActualizada
+    )
+  }
+
   return (
     <main>
       <h1>Proyectos Educativos</h1>

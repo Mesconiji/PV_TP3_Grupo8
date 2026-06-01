@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { Box , Thypography , TextField , Container } from '@mui/material'
+import { Box , Typhograpy , TextField , Container } from '@mui/material'
 import proyectoService from '../services/proyectoService'
 import ProyectoCard from '../components/ProyectoCard'
 import DetalleProyecto from './DetalleProyecto'

@@ -106,7 +106,7 @@ const ListaProyectos = () => {
         <>
           <FormularioProyecto alAgregar={agregarNuevoProyecto} />
 
-          <Box sx={{ marginTop: 4 }}>
+          <Box sx={{ marginTop: 3 }}>
             <TextField
               fullwidth
               Label="Buscar por titulo o cateogoria"
@@ -115,7 +115,7 @@ const ListaProyectos = () => {
             />
           </Box>
 
-          <Box sx={{ marginTop: 3 , display : 'flex' , flexDirection : 'column' , gap : 2 }}>
+          <Box sx={{ marginTop: 3 , display : 'flex' , flexDirection : 'column' , gap : 1 }}>
             {proyectosFiltrados.map((proyecto) => (
               <ProyectoCard
                 key={proyecto.id}

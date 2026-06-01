@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { Box , Thypography , TextField , Container } from '@mui/material'
 import proyectoService from '../services/proyectoService'
 import ProyectoCard from '../components/ProyectoCard'
 import DetalleProyecto from './DetalleProyecto'
@@ -89,10 +90,11 @@ const ListaProyectos = () => {
   }
 
   return (
-    <main>
-      <h1>Proyectos Educativos</h1>
+    <contaniner maxwidhth ="lg" >
+      <thypography variant="h4" align="center" gutterBottom>
+        Lista de Proyectos
+      </thypography>
 
-      
       {proyectoSeleccionado ? (
 
         <DetalleProyecto
@@ -104,16 +106,16 @@ const ListaProyectos = () => {
         <>
           <FormularioProyecto alAgregar={agregarNuevoProyecto} />
 
-          <div className="buscador" style={{ marginTop: '20px' }}>
-            <input
-              type="text"
-              placeholder="Buscar proyecto por titulo"
+          <Box sx={{ marginTop: 4 }}>
+            <TextField
+              fullwidth
+              Label="Buscar por titulo o cateogoria"
               value={busqueda}
-              onChange={manejarBusqueda}
+              onChange={manejarBusqueda}  
             />
-          </div>
+          </Box>
 
-          <div className="lista" style={{ marginTop: '20px' }}>
+          <Box sx={{ marginTop: 3 , display : 'flex' , flexDirection : 'column' , gap : 2 }}>
             {proyectosFiltrados.map((proyecto) => (
               <ProyectoCard
                 key={proyecto.id}
@@ -122,13 +124,13 @@ const ListaProyectos = () => {
                 manejarVerDetalle={setProyectoSeleccionado}
               />
             ))}
-          </div>
+          </Box>
         </>
       )}
 
       {fechaHora && <RegistroActividad fechaHora={fechaHora} />}
 
-    </main>
+    </contaniner>
   )
 }
 

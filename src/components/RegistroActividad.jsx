@@ -1,21 +1,3 @@
-<<<<<<< HEAD
-const RegistroActividad = ({ fechaHora }) => {
-
-    return (
-
-        <div>
-
-            <p>
-                Última actualización de la lista:
-                {fechaHora}
-            </p>
-
-        </div>
-
-    );
-
-=======
-
 const RegistroActividad = ({ fechaHora }) => {
     
   return (
@@ -30,12 +12,19 @@ const RegistroActividad = ({ fechaHora }) => {
         boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
       }}
     >
-      <p style={{ margin: 0, fontWeight: '600', color: '#2c3e50', fontSize: '1.1rem' }}>
-         Última actualización de la lista: {fechaHora}
+      <p 
+        style={{ 
+          margin: 0, 
+          fontWeight: '600', 
+          color: '#2c3e50', 
+          fontSize: '1.1rem' 
+        }}
+      >
+        Última actualización de la lista: {fechaHora}
       </p>
     </div>
   );
->>>>>>> main
+
 };
 
 export default RegistroActividad;

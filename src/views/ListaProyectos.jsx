@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
 import proyectoService from '../services/proyectoService'
-import ProyectoCard from './ProyectoCard'
+import ProyectoCard from '../components/ProyectoCard'
 import DetalleProyecto from './DetalleProyecto'
-import FormularioProyecto from './FormularioProyecto'
-import RegistroActividad from './RegistroActividad'
+import FormularioProyecto from '../components/FormularioProyecto'
+import RegistroActividad from '../components/RegistroActividad'
 
 const ListaProyectos = () => {
 

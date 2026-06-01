@@ -1,12 +1,11 @@
+import Alert from '@mui/material/Alert';
 
 const RegistroActividad = ({ fechaHora }) => {
     
   return (
-    <div className="registro-actividad">
-      <p className="registro-actividad__texto">
+      <Alert severity="info" icon={false} sx={{ marginTop: 2 }}>
          Última actualización de la lista: {fechaHora}
-      </p>
-    </div>
+      </Alert>
   );
 };
 

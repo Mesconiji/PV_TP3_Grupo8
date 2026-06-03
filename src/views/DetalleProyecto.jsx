@@ -1,8 +1,20 @@
-const DetalleProyecto = ({ proyecto, volverALista }) => {
+import { useParams, Link } from 'react-router-dom';
+import proyectoService from '../services/proyectoService';
 
+
+const DetalleProyecto = () => {
+
+  const { id } = useParams();
+  const listaProyectos = proyectoService.obtenerProyectos();
+  const proyecto = listaProyectos.find((p) => p.id.toString() === id);
 
   if (!proyecto) {
-    return null;
+    return (
+      <div className="card" style={{ width: '100%', textAlign: 'center' }}>
+        <h2>Proyecto no encontrado</h2>
+        <Link to="/proyectos" className="btn btn--volver">Volver a la lista</Link>
+      </div>
+    );
   }
 
   const { titulo, categoria, estado, descripcion, recursos, equipo } = proyecto;
@@ -10,12 +22,13 @@ const DetalleProyecto = ({ proyecto, volverALista }) => {
   return (
     <div className="card" style={{ width: '100%' }}>
 
-      <button
+      <Link
+        to="/proyectos" 
         className="btn btn--volver"
-        onClick={volverALista}
+        style={{ display: 'inline-block', marginBottom: '20px', textDecoration: 'none' }}
       >
         ← Volver a la lista
-      </button>
+      </Link>
 
       <h2>{titulo}</h2>
 

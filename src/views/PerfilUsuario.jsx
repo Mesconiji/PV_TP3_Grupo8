@@ -5,48 +5,34 @@ import Paper from '@mui/material/Paper'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
-import Grid from '@mui/material/Grid'
 
 const PerfilUsuario = () => {
   return (
-    <Container maxWidth="sm" className="profileContainer">
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Box className="profileIntro">
-            <Typography variant="h4" component="h1" gutterBottom>
-              Perfil de Usuario
-            </Typography>
-            <Typography variant="body1" color="text.secondary">
-              Información del alumno o docente organizada de manera clara y elegante.
-            </Typography>
-          </Box>
-        </Grid>
+    <Container maxWidth="lg" className="profileContainer">
+      <Box sx={{ textAlign: 'center', mb: 3 }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Perfil de Usuario
+        </Typography>
+        <Typography variant="body1" color="text.secondary">
+          Información del alumno o docente organizada de manera clara y elegante.
+        </Typography>
+      </Box>
 
-        <Grid item xs={12}>
-          <Paper elevation={3} className="profilePaper">
-            <List>
-              <ListItem disablePadding>
-                <ListItemText
-                  primary="Nombre"
-                  secondary="María González"
-                />
-              </ListItem>
-              <ListItem disablePadding>
-                <ListItemText
-                  primary="Rol"
-                  secondary="Docente de Matemáticas"
-                />
-              </ListItem>
-              <ListItem disablePadding>
-                <ListItemText
-                  primary="Institución"
-                  secondary="Escuela Secundaria Nº 8"
-                />
-              </ListItem>
-            </List>
-          </Paper>
-        </Grid>
-      </Grid>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Paper elevation={3} className="profilePaper" sx={{ width: '100%', maxWidth: 420, p: 2 }}>
+          <List>
+            <ListItem disablePadding>
+              <ListItemText primary="Nombre" secondary="María González" />
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemText primary="Rol" secondary="Docente de Matemáticas" />
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemText primary="Institución" secondary="Escuela Secundaria Nº 8" />
+            </ListItem>
+          </List>
+        </Paper>
+      </Box>
     </Container>
   )
 }

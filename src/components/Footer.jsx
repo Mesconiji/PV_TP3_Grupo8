@@ -1,9 +1,15 @@
+import { Box, Container, Typography } from '@mui/material'
+
 const Footer = () => {
   return (
-    <footer>
-      <p>Analista Programador Universitario - Programación Visual - Grupo 8</p>
-    </footer>
-  );
-};
+    <Box component="footer" sx={{ backgroundColor: '#2c3e50', color: 'white', py: 1, mt: 3, borderRadius: 0 }}>
+      <Container maxWidth="lg">
+        <Typography variant="body2" align="center" sx={{ opacity: 0.95 }}>
+          Analista Programador Universitario - Programación Visual - Grupo 8
+        </Typography>
+      </Container>
+    </Box>
+  )
+}
 
-export default Footer;
+export default Footer

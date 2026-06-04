@@ -1,33 +1,46 @@
+import { Card, CardHeader, CardContent, CardActions, Button } from '@mui/material'
+import { Link } from 'react-router-dom'
 
-const ProyectoCard = ({ proyecto, manejarEliminar, manejarVerDetalle }) => {
-
-  const { titulo, categoria, estado, id } = proyecto;
-
-  const badgeClase = estado === "Activo" ? "badge-teal" : "badge-gray";
+const ProyectoCard = ({ proyecto, manejarEliminar }) => {
+  const { titulo, categoria, estado, id } = proyecto
 
   return (
-    <div className="card">
-      <h2 className="card__titulo">{titulo}</h2>
-      <p className="card__categoria">{categoria}</p>
+    <Card variant="outlined" className="card proyecto-card">
+      <CardHeader
+        title={titulo}
+        subheader={categoria}
+        titleTypographyProps={{ align: 'center' }}
+        subheaderTypographyProps={{ align: 'center' }}
+      />
 
-      <span className={`badge ${badgeClase}`}>{estado}</span>
+      <CardContent sx={{ display: 'flex', justifyContent: 'center', pb: 1 }}>
+        <span className={`badge ${estado === 'Activo' ? 'badge-teal' : 'badge-gray'}`}>
+          {estado}
+        </span>
+      </CardContent>
 
-      <div className="card__acciones">
-        <button
+      <CardActions sx={{ justifyContent: 'center', gap: 2, pb: 2 }}>
+        <Button
+          component={Link}
+          to={`/proyectos/${id}`}
+          size="small"
           className="btn btn--detalle"
-          onClick={() => manejarVerDetalle(proyecto)}
+          sx={{ textTransform: 'none', padding: '6px 12px', fontSize: '0.9rem' }}
         >
           Ver detalle
-        </button>
-        <button
+        </Button>
+
+        <Button
           className="btn btn--eliminar"
+          size="small"
           onClick={() => manejarEliminar(id)}
+          sx={{ textTransform: 'none', padding: '6px 12px', fontSize: '0.9rem' }}
         >
           Eliminar
-        </button>
-      </div>
-    </div>
-  );
-};
+        </Button>
+      </CardActions>
+    </Card>
+  )
+}
 
-export default ProyectoCard;
+export default ProyectoCard

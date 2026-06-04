@@ -11,7 +11,7 @@ const App = () => (
 
     <Grid container direction="column" className="app">
 
-      <Grid item component="header">
+      <Grid item component="div">
         <Header />
       </Grid>
 
@@ -19,7 +19,7 @@ const App = () => (
         <Outlet />
       </Grid>
 
-      <Grid item component="footer">
+      <Grid item component="div">
         <Footer />
       </Grid>
 

@@ -5,11 +5,13 @@ import Dashboard from '../views/Dashboard.jsx'
 import ListaProyectos from '../views/ListaProyectos.jsx'
 import DetalleProyecto from '../views/DetalleProyecto.jsx'
 import PerfilUsuario from '../views/PerfilUsuario.jsx'
+import ErrorPage from '../views/ErrorPage.jsx'
 
 const routes = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -32,6 +34,10 @@ const routes = createBrowserRouter([
         element: <PerfilUsuario />
       }
     ]
+  },
+  {
+    path: '*',
+    element: <ErrorPage />
   }
 ])
 

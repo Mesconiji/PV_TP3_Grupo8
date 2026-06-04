@@ -1,7 +1,6 @@
 ﻿import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
-import Grid from '@mui/material/Grid'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 
@@ -18,10 +17,10 @@ const Dashboard = () => {
         </Typography>
       </Box>
 
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={6}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', gap: 3, flexWrap: 'wrap' }}>
+        <Box sx={{ width: '100%', maxWidth: 420, mx: 1 }}>
           <Card elevation={3} className="metricCard">
-            <CardContent>
+            <CardContent sx={{ textAlign: 'center', py: 4 }}>
               <Typography variant="subtitle2" color="text.secondary" gutterBottom>
                 Total de proyectos
               </Typography>
@@ -33,11 +32,11 @@ const Dashboard = () => {
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
+        </Box>
 
-        <Grid item xs={12} md={6}>
+        <Box sx={{ width: '100%', maxWidth: 420, mx: 1 }}>
           <Card elevation={3} className="metricCard">
-            <CardContent>
+            <CardContent sx={{ textAlign: 'center', py: 4 }}>
               <Typography variant="subtitle2" color="text.secondary" gutterBottom>
                 Proyectos en curso
               </Typography>
@@ -49,8 +48,8 @@ const Dashboard = () => {
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
     </Container>
   )
 }

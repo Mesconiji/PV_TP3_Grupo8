@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
-import { Box , Typography , TextField , Container } from '@mui/material'
+import { Box, Typography, TextField, Container } from '@mui/material'
 import proyectoService from '../services/proyectoService'
 import ProyectoCard from '../components/ProyectoCard'
-import DetalleProyecto from './DetalleProyecto'
 import FormularioProyecto from '../components/FormularioProyecto'
 import RegistroActividad from '../components/RegistroActividad'
 
@@ -11,30 +10,27 @@ const ListaProyectos = () => {
   const [proyectos, setProyectos] = useState(proyectoService.obtenerProyectos())
   const [proyectosFiltrados, setProyectosFiltrados] = useState(proyectoService.obtenerProyectos())
   const [busqueda, setBusqueda] = useState('')
-  const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null)
   const [fechaHora, setFechaHora] = useState(null)
 
   const esMontajeInicial = useRef(proyectos)
 
   useEffect(() => {
-
     if (esMontajeInicial.current === proyectos) {
-      return
+      return;
     }
 
     const ahora = new Date()
 
     const fechaFormateada =
       ahora.toLocaleDateString('es-AR') +
-      " a las " +
+      ' a las ' +
       ahora.toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit"
+        hour: '2-digit',
+        minute: '2-digit'
       }) +
-      " hs."
+      ' hs.'
 
     setFechaHora(fechaFormateada)
-
   }, [proyectos])
 
   const manejarBusqueda = (evento) => {
@@ -90,47 +86,35 @@ const ListaProyectos = () => {
   }
 
   return (
-    <contaniner maxwidhth ="lg" >
-      <thypography variant="h4" align="center" gutterBottom>
+    <Container maxWidth="lg">
+      <Typography variant="h4" align="center" gutterBottom>
         Lista de Proyectos
-      </thypography>
+      </Typography>
 
-      {proyectoSeleccionado ? (
+      <FormularioProyecto alAgregar={agregarNuevoProyecto} />
 
-        <DetalleProyecto
-          proyecto={proyectoSeleccionado}
-          volverALista={() => setProyectoSeleccionado(null)}
+      <Box sx={{ marginTop: 3 }}>
+        <TextField
+          fullWidth
+          label="Buscar por título o categoría"
+          value={busqueda}
+          onChange={manejarBusqueda}
         />
+      </Box>
 
-      ) : (
-        <>
-          <FormularioProyecto alAgregar={agregarNuevoProyecto} />
-
-          <Box sx={{ marginTop: 3 }}>
-            <TextField
-              fullwidth
-              Label="Buscar por titulo o cateogoria"
-              value={busqueda}
-              onChange={manejarBusqueda}  
-            />
-          </Box>
-
-          <Box sx={{ marginTop: 3 , display : 'flex' , flexDirection : 'column' , gap : 1 }}>
-            {proyectosFiltrados.map((proyecto) => (
-              <ProyectoCard
-                key={proyecto.id}
-                proyecto={proyecto}
-                manejarEliminar={manejarEliminar}
-                manejarVerDetalle={setProyectoSeleccionado}
-              />
-            ))}
-          </Box>
-        </>
-      )}
+      <Box sx={{ marginTop: 3 }} className="lista">
+        {proyectosFiltrados.map((proyecto) => (
+          <ProyectoCard
+            key={proyecto.id}
+            proyecto={proyecto}
+            manejarEliminar={manejarEliminar}
+          />
+        ))}
+      </Box>
 
       {fechaHora && <RegistroActividad fechaHora={fechaHora} />}
 
-    </contaniner>
+    </Container>
   )
 }
 

@@ -7,7 +7,7 @@ import './css/proyectostyle.css'
 import './css/detallestyle.css'
 
 const App = () => (
-  <>
+  <div className="app-root">
     <Header />
 
     <Container maxWidth="lg">
@@ -19,7 +19,7 @@ const App = () => (
     </Container>
 
     <Footer />
-  </>
+  </div>
 )
 
 export default App

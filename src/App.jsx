@@ -7,25 +7,19 @@ import './css/proyectostyle.css'
 import './css/detallestyle.css'
 
 const App = () => (
-  <Container maxWidth="lg">
+  <>
+    <Header />
 
-    <Grid container direction="column" className="app">
-
-      <Grid item component="div">
-        <Header />
+    <Container maxWidth="lg">
+      <Grid container direction="column" className="app">
+        <Grid item xs component="main" className="app__main">
+          <Outlet />
+        </Grid>
       </Grid>
+    </Container>
 
-      <Grid item xs component="main" className="app__main">
-        <Outlet />
-      </Grid>
-
-      <Grid item component="div">
-        <Footer />
-      </Grid>
-
-    </Grid>
-
-  </Container>
+    <Footer />
+  </>
 )
 
 export default App

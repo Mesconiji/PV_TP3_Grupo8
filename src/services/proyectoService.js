@@ -96,25 +96,46 @@ const proyectoService = (() => {
     ];
 
     const obtenerProyectos = () => {
-        return proyectos.filter(proyecto => proyecto.visible === true).map(p => ({ ...p }));
+
+        return proyectos
+            .filter(proyecto => proyecto.visible === true)
+            .map(p => ({ ...p }));
+
     };
 
     const obtenerProyectosActivos = () => {
-        return proyectos.filter(proyecto => proyecto.visible === true);
+
+        return proyectos.filter(
+            proyecto => proyecto.visible === true
+        );
+
     };
 
     const agregarProyecto = (nuevoProyecto) => {
-        proyectos.push({ ...nuevoProyecto, visible: true });
+
+        proyectos.push({
+            ...nuevoProyecto,
+            visible: true
+        });
+
     };
 
     const eliminarProyecto = (id) => {
-        const proyecto = proyectos.find(p => p.id === id);
+
+        const proyecto = proyectos.find(
+            p => p.id === id
+        );
+
         if (proyecto) {
+
             proyecto.visible = false;
+
         }
+
     };
 
     const buscarProyecto = (texto) => {
+
         return proyectos.filter(
             proyecto =>
                 proyecto.visible === true &&
@@ -122,6 +143,7 @@ const proyectoService = (() => {
                     .toLowerCase()
                     .includes(texto.toLowerCase())
         );
+
     };
 
     return {

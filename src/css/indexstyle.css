@@ -94,3 +94,33 @@ footer {
     color: #2c3e50;
     font-size: 1.1rem;
 }
+
+.dashboardContainer {
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.dashboardIntro {
+    margin-bottom: 1.5rem;
+}
+
+.metricCard {
+    min-height: 170px;
+}
+
+.metricText {
+    margin-top: 0.75rem;
+}
+
+.profileContainer {
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.profileIntro {
+    margin-bottom: 1.5rem;
+}
+
+.profilePaper {
+    padding: 1.5rem;
+}

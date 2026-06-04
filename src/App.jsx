@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import { Box, Container } from '@mui/material'
+import { Grid, Container } from '@mui/material'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import './css/indexstyle.css'
@@ -7,17 +7,25 @@ import './css/proyectostyle.css'
 import './css/detallestyle.css'
 
 const App = () => (
-  <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+  <Container maxWidth="lg">
 
-    <Header />
+    <Grid container direction="column" className="app">
 
-    <Container component="main" maxWidth="lg" sx={{ flexGrow: 1, py: 4 }}>
-      <Outlet />
-    </Container>
+      <Grid item component="header">
+        <Header />
+      </Grid>
 
-    <Footer />
+      <Grid item xs component="main" className="app__main">
+        <Outlet />
+      </Grid>
 
-  </Box>
+      <Grid item component="footer">
+        <Footer />
+      </Grid>
+
+    </Grid>
+
+  </Container>
 )
 
 export default App

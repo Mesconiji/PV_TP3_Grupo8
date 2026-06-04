@@ -8,7 +8,7 @@ const Footer = () => {
         backgroundColor: '#2c3e50',
         color: 'white',
         py: { xs: 1.5, sm: 2 },
-        mt: 3,
+        mt: 'auto',
         borderRadius: 0
       }}
     >

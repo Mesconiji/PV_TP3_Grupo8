@@ -1,4 +1,4 @@
-﻿import {useState} from 'react'
+﻿import { useState } from 'react'
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
@@ -6,10 +6,24 @@ import Paper from '@mui/material/Paper'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
+import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import { useAuth } from '../hook/useAuth.jsx'
 
 const PerfilUsuario = () => {
+  const { auth, actualizarPerfil } = useAuth()
+  const usuario = auth?.usuario || {}
+
+  const [enEdicion, setEnEdicion] = useState(false)
+  const [nombre, setNombre] = useState(usuario.nombre || '')
+  const [rol, setRol] = useState(usuario.rol || '')
+  const [institucion, setInstitucion] = useState(usuario.institucion || '')
+
+  const handleGuardar = () => {
+    actualizarPerfil({ nombre, rol, institucion })
+    setEnEdicion(false)
+  }
+
   return (
     <Container maxWidth="lg" className="profileContainer">
       <Box sx={{ textAlign: 'center', mb: 3 }}>
@@ -34,7 +48,7 @@ const PerfilUsuario = () => {
                   size="small"
                 />
               ) : (
-                <ListItemText primary="Nombre" secondary={usuario?.nombre} />
+                <ListItemText primary="Nombre" secondary={usuario.nombre || 'No definido'} />
               )}
             </ListItem>
 
@@ -48,7 +62,7 @@ const PerfilUsuario = () => {
                   size="small"
                 />
               ) : (
-                <ListItemText primary="Rol" secondary={usuario?.rol} />
+                <ListItemText primary="Rol" secondary={usuario.rol || 'No definido'} />
               )}
             </ListItem>
 
@@ -62,7 +76,7 @@ const PerfilUsuario = () => {
                   size="small"
                 />
               ) : (
-                <ListItemText primary="Institución" secondary={usuario?.institucion} />
+                <ListItemText primary="Institución" secondary={usuario.institucion || 'No definida'} />
               )}
             </ListItem>
           </List>

@@ -5,6 +5,7 @@ import Dashboard from '../views/Dashboard.jsx'
 import ListaProyectos from '../views/ListaProyectos.jsx'
 import DetalleProyecto from '../views/DetalleProyecto.jsx'
 import PerfilUsuario from '../views/PerfilUsuario.jsx'
+import Login from '../views/Login.jsx'
 import ErrorPage from '../views/ErrorPage.jsx'
 
 import RutaPrivada from '../components/RutaPrivada.jsx' 
@@ -21,16 +22,15 @@ const routes = createBrowserRouter([
       },
       {
         path: 'login',
-        element: <div>Pantalla de Login (Componente del Integrante 3)</div> 
+        element: <Login />
       },
-
+      {
+        path: 'dashboard',
+        element: <Dashboard />
+      },
       {
         element: <RutaPrivada />,
         children: [
-          {
-            path: 'dashboard',
-            element: <Dashboard />
-          },
           {
             path: 'proyectos',
             element: <ListaProyectos />

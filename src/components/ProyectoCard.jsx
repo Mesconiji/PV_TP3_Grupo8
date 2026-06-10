@@ -1,44 +1,40 @@
-
+import { Card, CardHeader, CardContent, CardActions, Button } from '@mui/material'
 import { Link } from 'react-router-dom'
-
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import CardActions from '@mui/material/CardActions'
-import Button from '@mui/material/Button'
-import Typography from '@mui/material/Typography'
 
 const ProyectoCard = ({ proyecto, manejarEliminar }) => {
   const { titulo, categoria, estado, id } = proyecto
 
   return (
-    <Card sx={{ maxWidth: 345, margin: 2 }}>
-      <CardContent>
-        <Typography variant="h5">
-          {titulo}
-        </Typography>
+    <Card variant="outlined" className="card proyecto-card">
+      <CardHeader
+        title={titulo}
+        subheader={categoria}
+        titleTypographyProps={{ align: 'center' }}
+        subheaderTypographyProps={{ align: 'center' }}
+      />
 
-        <Typography color="text.secondary">
-          {categoria}
-        </Typography>
-
-        <Typography sx={{ mt: 1 }}>
-          Estado: {estado}
-        </Typography>
+      <CardContent sx={{ display: 'flex', justifyContent: 'center', pb: 1 }}>
+        <span className={`badge ${estado === 'Activo' ? 'badge-teal' : 'badge-gray'}`}>
+          {estado}
+        </span>
       </CardContent>
 
-      <CardActions>
+      <CardActions sx={{ justifyContent: 'center', gap: 2, pb: 2 }}>
         <Button
           component={Link}
           to={`/proyectos/${id}`}
           size="small"
+          className="btn btn--detalle"
+          sx={{ textTransform: 'none', padding: '6px 12px', fontSize: '0.9rem' }}
         >
           Ver detalle
         </Button>
 
         <Button
+          className="btn btn--eliminar"
           size="small"
-          color="error"
           onClick={() => manejarEliminar(id)}
+          sx={{ textTransform: 'none', padding: '6px 12px', fontSize: '0.9rem' }}
         >
           Eliminar
         </Button>
@@ -48,4 +44,3 @@ const ProyectoCard = ({ proyecto, manejarEliminar }) => {
 }
 
 export default ProyectoCard
-

@@ -61,28 +61,22 @@ const Nav = () => {
         )}
       </NavLink>
 
-      {/* Solo visibles si el usuario está logeado */}
-      {auth.estaLogeado && (
-        <NavLink to="/proyectos" style={estilosLink}>
-          {({ isActive }) => (
-            <Button sx={estilosBoton} variant={isActive ? 'outlined' : 'text'}>
-              Explorar Tutorías
-            </Button>
-          )}
-        </NavLink>
-      )}
+      <NavLink to="/proyectos" style={estilosLink}>
+        {({ isActive }) => (
+          <Button sx={estilosBoton} variant={isActive ? 'outlined' : 'text'}>
+            Explorar Tutorías
+          </Button>
+        )}
+      </NavLink>
 
-      {auth.estaLogeado && (
-        <NavLink to="/perfil" style={estilosLink}>
-          {({ isActive }) => (
-            <Button sx={estilosBoton} variant={isActive ? 'outlined' : 'text'}>
-              Mi Perfil
-            </Button>
-          )}
-        </NavLink>
-      )}
+      <NavLink to="/perfil" style={estilosLink}>
+        {({ isActive }) => (
+          <Button sx={estilosBoton} variant={isActive ? 'outlined' : 'text'}>
+            Mi Perfil
+          </Button>
+        )}
+      </NavLink>
 
-      {/* Botón logout — solo visible si está logeado */}
       {auth.estaLogeado && (
         <Button
           variant="contained"

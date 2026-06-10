@@ -1,10 +1,12 @@
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useAuth } from '../hook/useAuth';
 
-const RutaPrivada = () => {
-  const { auth } = useAuth();
+const RutaPrivada = ({ children }) => {
+  const { estaLogeado } = useAuth();
 
-  return auth.estaLogeado ? <Outlet /> : <Navigate to="/login" replace />;
+  if (!estaLogeado) return <Navigate to="/" replace />;
+  
+  return children;
 };
 
 export default RutaPrivada;

@@ -1,10 +1,39 @@
-﻿// PERFIL DE USUARIO DE PRUEBA, DESPUES CAMBIAR
+﻿import Container from '@mui/material/Container'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import Paper from '@mui/material/Paper'
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
+import ListItemText from '@mui/material/ListItemText'
+
 const PerfilUsuario = () => {
   return (
-    <section>
-      <h1>Perfil de Usuario</h1>
-      <p>Aquí aparecerá la información del usuario.</p>
-    </section>
+    <Container maxWidth="lg" className="profileContainer">
+      <Box sx={{ textAlign: 'center', mb: 3 }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Perfil de Usuario
+        </Typography>
+        <Typography variant="body1" color="text.secondary">
+          Información del alumno o docente organizada de manera clara y elegante.
+        </Typography>
+      </Box>
+
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Paper elevation={3} className="profilePaper" sx={{ width: '100%', maxWidth: 420, p: 2 }}>
+          <List>
+            <ListItem disablePadding>
+              <ListItemText primary="Nombre" secondary="María González" />
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemText primary="Rol" secondary="Docente de Matemáticas" />
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemText primary="Institución" secondary="Escuela Secundaria Nº 8" />
+            </ListItem>
+          </List>
+        </Paper>
+      </Box>
+    </Container>
   )
 }
 

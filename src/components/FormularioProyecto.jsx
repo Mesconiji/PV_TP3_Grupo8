@@ -1,4 +1,5 @@
 ﻿import { useState } from 'react'
+import { Box , TextField , Button , FormControlLabel , Checkbox } from '@mui/material' 
 
 const FormularioProyecto = ({ alAgregar }) => {
 
@@ -52,97 +53,108 @@ const FormularioProyecto = ({ alAgregar }) => {
   } = nuevoProyecto
 
   return (
-    <form onSubmit={manejarSubmit} className="buscador" style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '20px' }}>
-      <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', alignItems: 'center' }}>
-        <input
-          type="text"
+    <Box
+      component="form"
+      onSubmit={manejarSubmit}
+      sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 3 }}
+    >
+
+      <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', alignItems: 'center' }}>
+        <TextField
+          label="Título del proyecto"
           name="titulo"
-          placeholder="Titulo del proyecto"
           value={titulo}
           onChange={manejarCambio}
           required
+          size="small"
+          sx={{ flex: 1, minWidth: 200 }}
         />
-
-        <input
-          type="text"
+        <TextField
+          label="Categoría"
           name="categoria"
-          placeholder="Categoría"
           value={categoria}
           onChange={manejarCambio}
           required
+          size="small"
+          sx={{ flex: 1, minWidth: 150 }}
         />
+        <FormControlLabel
+          control={
+            <Checkbox
+              name="activo"
+              checked={activo}
+              onChange={manejarCambio}
+            />
+          }
+          label="Activo"
+        />
+      </Box>
 
-        <label style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-          <input
-            type="checkbox"
-            name="activo"
-            checked={activo}
-            onChange={manejarCambio}
-          />
-          Activo
-        </label>
-      </div>
 
-      <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-        <input
-          type="text"
+      <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+        <TextField
+          label="Descripción (Párrafo 1)"
           name="descParrafo1"
-          placeholder="Descripción (Párrafo 1)"
           value={descParrafo1}
           onChange={manejarCambio}
           required
+          size="small"
+          sx={{ flex: 1, minWidth: 200 }}
         />
-
-        <input
-          type="text"
+        <TextField
+          label="Descripción (Párrafo 2)"
           name="descParrafo2"
-          placeholder="Descripción (Párrafo 2)"
           value={descParrafo2}
           onChange={manejarCambio}
           required
+          size="small"
+          sx={{ flex: 1, minWidth: 200 }}
         />
-      </div>
+      </Box>
 
-      <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-        <input
-          type="text"
+      <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+        <TextField
+          label="Nombre del recurso"
           name="nombreRecurso"
-          placeholder="Nombre del recurso"
           value={nombreRecurso}
           onChange={manejarCambio}
+          size="small"
+          sx={{ flex: 1, minWidth: 200 }}
         />
-
-        <input
-          type="text"
+        <TextField
+          label="Enlace del recurso"
           name="enlaceRecurso"
-          placeholder="Enlace del recurso"
           value={enlaceRecurso}
           onChange={manejarCambio}
+          size="small"
+          sx={{ flex: 1, minWidth: 200 }}
         />
-      </div>
+      </Box>
 
-      <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-        <input
-          type="text"
+      <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+        <TextField
+          label="Nombre del integrante"
           name="nombreEquipo"
-          placeholder="Nombre del integrante"
           value={nombreEquipo}
           onChange={manejarCambio}
+          size="small"
+          sx={{ flex: 1, minWidth: 200 }}
         />
-
-        <input
-          type="text"
+        <TextField
+          label="Rol del integrante"
           name="rolEquipo"
-          placeholder="Rol del integrante"
           value={rolEquipo}
           onChange={manejarCambio}
+          size="small"
+          sx={{ flex: 1, minWidth: 200 }}
         />
-      </div>
+      </Box>
 
-      <button type="submit">
+      <Button type="submit" variant="contained">
         Agregar proyecto
-      </button>
-    </form>
+      </Button>
+
+    </Box>
   )
 }
 

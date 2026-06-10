@@ -1,3 +1,4 @@
+
 import { Link } from 'react-router-dom'
 
 import Card from '@mui/material/Card'
@@ -7,14 +8,11 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 
 const ProyectoCard = ({ proyecto, manejarEliminar }) => {
-
   const { titulo, categoria, estado, id } = proyecto
 
   return (
     <Card sx={{ maxWidth: 345, margin: 2 }}>
-
       <CardContent>
-
         <Typography variant="h5">
           {titulo}
         </Typography>
@@ -26,11 +24,9 @@ const ProyectoCard = ({ proyecto, manejarEliminar }) => {
         <Typography sx={{ mt: 1 }}>
           Estado: {estado}
         </Typography>
-
       </CardContent>
 
       <CardActions>
-
         <Button
           component={Link}
           to={`/proyectos/${id}`}
@@ -46,9 +42,7 @@ const ProyectoCard = ({ proyecto, manejarEliminar }) => {
         >
           Eliminar
         </Button>
-
       </CardActions>
-
     </Card>
   )
 }

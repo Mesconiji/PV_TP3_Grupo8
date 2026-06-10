@@ -94,3 +94,57 @@ footer {
     color: #2c3e50;
     font-size: 1.1rem;
 }
+
+.dashboardContainer {
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.dashboardIntro {
+    margin-bottom: 1.5rem;
+}
+
+.metricCard {
+    min-height: 170px;
+}
+
+.metricText {
+    margin-top: 0.75rem;
+}
+
+.profileContainer {
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.profileIntro {
+    margin-bottom: 1.5rem;
+}
+
+.profilePaper {
+    padding: 1.5rem;
+}
+
+/* LAYOUT: mantener footer al fondo */
+.app-root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Hacer que el contenedor principal crezca dentro del layout */
+.app-root .MuiContainer-root {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.app {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.app__main {
+    flex: 1 0 auto;
+}

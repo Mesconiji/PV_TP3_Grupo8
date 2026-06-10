@@ -18,11 +18,15 @@ import './css/proyectostyle.css'
 
 const theme = createTheme()
 
+import { UsuarioProvider } from './context/UsuarioContext.jsx'
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <RouterProvider router={routes} />
+      <UsuarioProvider>
+        <RouterProvider router={routes} />
+      </UsuarioProvider>
     </ThemeProvider>
   </StrictMode>
 )

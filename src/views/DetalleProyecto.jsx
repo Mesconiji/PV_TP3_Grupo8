@@ -1,55 +1,89 @@
-const DetalleProyecto = ({ proyecto, volverALista }) => {
+import { useParams, Link } from 'react-router-dom';
+import proyectoService from '../services/proyectoService';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
 
+const DetalleProyecto = () => {
+  const { id } = useParams();
+  const listaProyectos = proyectoService.obtenerProyectos();
+  const proyecto = listaProyectos.find((p) => p.id.toString() === id);
 
   if (!proyecto) {
-    return null;
+    return (
+      <Paper className="card" sx={{ width: '100%', textAlign: 'center', p: 3 }}>
+        <Typography variant="h5" gutterBottom>
+          Proyecto no encontrado
+        </Typography>
+        <Button component={Link} to="/proyectos" className="btn btn--volver" sx={{ mt: 2 }}>
+          Volver a la lista
+        </Button>
+      </Paper>
+    );
   }
 
   const { titulo, categoria, estado, descripcion, recursos, equipo } = proyecto;
 
   return (
-    <div className="card" style={{ width: '100%' }}>
+    <Paper className="card" sx={{ width: '100%', p: 3 }}>
+      <Box sx={{ mb: 2 }}>
+        <Button
+          component={Link}
+          to="/proyectos"
+          className="btn btn--volver"
+          sx={{ display: 'inline-block', textDecoration: 'none' }}
+        >
+          ← Volver a la lista
+        </Button>
+      </Box>
 
-      <button
-        className="btn btn--volver"
-        onClick={volverALista}
-      >
-        ← Volver a la lista
-      </button>
+      <Typography variant="h4" gutterBottom align="center">
+        {titulo}
+      </Typography>
 
-      <h2>{titulo}</h2>
+      <Typography variant="subtitle1" color="text.secondary">
+        <strong>Categoría:</strong> {categoria}
+      </Typography>
 
-      <p><strong>Categoría:</strong> {categoria}</p>
-      <p><strong>Estado:</strong> {estado}</p>
+      <Typography variant="subtitle1" color="text.secondary" sx={{ mb: 2 }}>
+        <strong>Estado:</strong> {estado}
+      </Typography>
 
+      <Box sx={{ my: 2 }}>
+        <Typography paragraph>{descripcion[0]}</Typography>
+        <Typography paragraph>{descripcion[1]}</Typography>
+      </Box>
 
-      <div style={{ margin: '20px 0' }}>
-        <p>{descripcion[0]}</p>
-        <br />
-        <p>{descripcion[1]}</p>
-      </div>
-
-      <h3>Recursos</h3>
-      <ul>
+      <Typography variant="h6" sx={{ mt: 2 }} align="center">
+        Recursos
+      </Typography>
+      <List sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
         {recursos.map((recurso, index) => (
-          <li key={index}>
-            <a href={recurso.enlace} >
+          <ListItem key={index} disablePadding sx={{ justifyContent: 'center' }}>
+            <a
+              href={recurso.enlace}
+              style={{ color: 'var(--color-secundario)', textDecoration: 'none' }}
+            >
               {recurso.nombre}
             </a>
-          </li>
+          </ListItem>
         ))}
-      </ul>
+      </List>
 
-      <h3 style={{ marginTop: '20px' }}>Equipo</h3>
-      <ul>
+      <Typography variant="h6" sx={{ mt: 2 }} align="center">
+        Equipo
+      </Typography>
+      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1, mt: 1 }}>
         {equipo.map((miembro, index) => (
-          <li key={index}>
+          <Typography key={index} variant="body1" align="center">
             {miembro.nombre} - {miembro.rol}
-          </li>
+          </Typography>
         ))}
-      </ul>
-
-    </div>
+      </Box>
+    </Paper>
   );
 };
 

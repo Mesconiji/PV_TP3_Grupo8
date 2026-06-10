@@ -1,6 +1,6 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { Box, Button } from '@mui/material';
-
+import { useAuth } from '../hook/useAuth';
 
 const estilosNav = {
   display: 'flex',
@@ -26,74 +26,75 @@ const estilosBoton = {
   },
   '&:hover': {
     backgroundColor: 'rgba(255, 255, 255, 0.06)'
-  },
-  '&:focus': {
-    outline: '2px solid white',
-    boxShadow: 'none'
-  },
-  '&.Mui-focusVisible': {
-    outline: '2px solid white',
-    boxShadow: 'none'
   }
 };
 
-const Nav = () => (
+const estilosBotonLogout = {
+  color: 'white',
+  backgroundColor: '#c0392b',
+  marginLeft: 2,
+  '&:hover': {
+    backgroundColor: '#a93226'
+  }
+};
 
-  <Box component="nav" sx={estilosNav}>
+const Nav = () => {
 
-    <NavLink
-      to="/dashboard"
-      end
-      style={estilosLink}
-    >
-      {({ isActive }) => (
+  const { auth, logout } = useAuth();
+
+  const navigate = useNavigate();
+
+  const manejarLogout = () => {
+    logout();
+    navigate('/dashboard');
+  };
+
+  return (
+    <Box component="nav" sx={estilosNav}>
+
+      {/* Inicio siempre visible */}
+      <NavLink to="/dashboard" end style={estilosLink}>
+        {({ isActive }) => (
+          <Button sx={estilosBoton} variant={isActive ? 'outlined' : 'text'}>
+            Inicio
+          </Button>
+        )}
+      </NavLink>
+
+      {/* Solo visibles si el usuario está logeado */}
+      {auth.estaLogeado && (
+        <NavLink to="/proyectos" style={estilosLink}>
+          {({ isActive }) => (
+            <Button sx={estilosBoton} variant={isActive ? 'outlined' : 'text'}>
+              Explorar Tutorías
+            </Button>
+          )}
+        </NavLink>
+      )}
+
+      {auth.estaLogeado && (
+        <NavLink to="/perfil" style={estilosLink}>
+          {({ isActive }) => (
+            <Button sx={estilosBoton} variant={isActive ? 'outlined' : 'text'}>
+              Mi Perfil
+            </Button>
+          )}
+        </NavLink>
+      )}
+
+      {/* Botón logout — solo visible si está logeado */}
+      {auth.estaLogeado && (
         <Button
-          sx={estilosBoton}
-          variant={isActive ? 'outlined' : 'text'}
-          onMouseDown={(e) => { e.currentTarget.style.outline = '2px solid white' }}
-          onFocus={(e) => { e.currentTarget.style.outline = '2px solid white' }}
-          onBlur={(e) => { e.currentTarget.style.outline = 'none' }}
+          variant="contained"
+          sx={estilosBotonLogout}
+          onClick={manejarLogout}
         >
-          Inicio
+          Cerrar Sesión
         </Button>
       )}
-    </NavLink>
 
-    <NavLink
-      to="/proyectos"
-      style={estilosLink}
-    >
-      {({ isActive }) => (
-        <Button
-          sx={estilosBoton}
-          variant={isActive ? 'outlined' : 'text'}
-          onMouseDown={(e) => { e.currentTarget.style.outline = '2px solid white' }}
-          onFocus={(e) => { e.currentTarget.style.outline = '2px solid white' }}
-          onBlur={(e) => { e.currentTarget.style.outline = 'none' }}
-        >
-          Explorar Tutorías
-        </Button>
-      )}
-    </NavLink>
-
-    <NavLink
-      to="/perfil"
-      style={estilosLink}
-    >
-      {({ isActive }) => (
-        <Button
-          sx={estilosBoton}
-          variant={isActive ? 'outlined' : 'text'}
-          onMouseDown={(e) => { e.currentTarget.style.outline = '2px solid white' }}
-          onFocus={(e) => { e.currentTarget.style.outline = '2px solid white' }}
-          onBlur={(e) => { e.currentTarget.style.outline = 'none' }}
-        >
-          Mi Perfil
-        </Button>
-      )}
-    </NavLink>
-
-  </Box>
-);
+    </Box>
+  );
+};
 
 export default Nav;

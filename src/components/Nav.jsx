@@ -1,13 +1,29 @@
+import { NavLink } from 'react-router-dom'
+
 const Nav = () => {
   return (
     <nav>
       <ul>
-        <li><a href="/">Inicio</a></li>
-        <li><a href="#">Explorar Tutorías</a></li>
-        <li><a href="#">Mi Perfil</a></li>
+        <li>
+          <NavLink to="/dashboard">
+            Inicio
+          </NavLink>
+        </li>
+
+        <li>
+          <NavLink to="/proyectos">
+            Explorar Tutorías
+          </NavLink>
+        </li>
+
+        <li>
+          <NavLink to="/perfil">
+            Mi Perfil
+          </NavLink>
+        </li>
       </ul>
     </nav>
-  );
-};
+  )
+}
 
-export default Nav;
+export default Nav

@@ -1,33 +1,57 @@
+import { Link } from 'react-router-dom'
 
-const ProyectoCard = ({ proyecto, manejarEliminar, manejarVerDetalle }) => {
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
+import CardActions from '@mui/material/CardActions'
+import Button from '@mui/material/Button'
+import Typography from '@mui/material/Typography'
 
-  const { titulo, categoria, estado, id } = proyecto;
+const ProyectoCard = ({ proyecto, manejarEliminar }) => {
 
-  const badgeClase = estado === "Activo" ? "badge-teal" : "badge-gray";
+  const { titulo, categoria, estado, id } = proyecto
 
   return (
-    <div className="card">
-      <h2 className="card__titulo">{titulo}</h2>
-      <p className="card__categoria">{categoria}</p>
+    <Card sx={{ maxWidth: 345, margin: 2 }}>
 
-      <span className={`badge ${badgeClase}`}>{estado}</span>
+      <CardContent>
 
-      <div className="card__acciones">
-        <button
-          className="btn btn--detalle"
-          onClick={() => manejarVerDetalle(proyecto)}
+        <Typography variant="h5">
+          {titulo}
+        </Typography>
+
+        <Typography color="text.secondary">
+          {categoria}
+        </Typography>
+
+        <Typography sx={{ mt: 1 }}>
+          Estado: {estado}
+        </Typography>
+
+      </CardContent>
+
+      <CardActions>
+
+        <Button
+          component={Link}
+          to={`/proyectos/${id}`}
+          size="small"
         >
           Ver detalle
-        </button>
-        <button
-          className="btn btn--eliminar"
+        </Button>
+
+        <Button
+          size="small"
+          color="error"
           onClick={() => manejarEliminar(id)}
         >
           Eliminar
-        </button>
-      </div>
-    </div>
-  );
-};
+        </Button>
 
-export default ProyectoCard;
+      </CardActions>
+
+    </Card>
+  )
+}
+
+export default ProyectoCard
+

@@ -1,22 +1,26 @@
-import Header from './components/Header';
-import ListaProyectos from './components/ListaProyectos';
-import Footer from './components/Footer';
 
-import './css/indexstyle.css';
-import './css/proyectostyle.css';
-import './css/detallestyle.css';
-import './css/perfilstyle.css';
+import { Outlet } from 'react-router-dom'
+
+import Header from './components/Header'
+import Footer from './components/Footer'
+
+import './css/indexstyle.css'
+import './css/proyectostyle.css'
+import './css/detallestyle.css'
 
 const App = () => {
+  return (
+    <>
+      <Header />
 
-    return (
-        <>
-            <Header />
-            <ListaProyectos />
-            <Footer />
-        </>
-    );
+      <main>
+        <Outlet />
+      </main>
 
-};
+      <Footer />
+    </>
+  )
+}
 
-export default App;
+
+export default App

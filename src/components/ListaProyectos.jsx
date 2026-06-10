@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react'
 import proyectoService from '../services/proyectoService'
 import ProyectoCard from './ProyectoCard'
-import DetalleProyecto from './DetalleProyecto'
+
 import FormularioProyecto from './FormularioProyecto'
 import RegistroActividad from './RegistroActividad'
 function ListaProyectos() {
 
   const [proyectos, setProyectos] = useState(proyectoService.obtenerProyectos())
   const [busqueda, setBusqueda] = useState('')
-  const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null)
+  
   const [fechaHora, setFechaHora] = useState('')
 
 
@@ -29,13 +29,7 @@ function ListaProyectos() {
 
 }, [proyectos])
 
-  const colorEstado = (estado) => {
-    if (estado === 'Activo') return 'badge badge-teal'
-    if (estado === 'Pausado') return 'badge badge-amber'
-    if (estado === 'Finalizado') return 'badge badge-gray'
-    if (estado === 'Pendiente') return 'badge badge-blue'
-    return 'badge badge-blue'
-  }
+  
 
   const manejarBusqueda = (evento) => {
     const texto = evento.target.value
@@ -68,42 +62,30 @@ function ListaProyectos() {
     <main>
       <h1>Proyectos Educativos</h1>
       <RegistroActividad fechaHora={fechaHora} />
+      <FormularioProyecto alAgregar={agregarNuevoProyecto} />
 
-      {/* Renderizado Condicional */}
-      {proyectoSeleccionado ? (
+<div className="buscador" style={{ marginTop: '20px' }}>
+  <input
+    type="text"
+    placeholder="Buscar proyecto por titulo"
+    value={busqueda}
+    onChange={manejarBusqueda}
+  />
+</div>
 
-        <DetalleProyecto
-          proyecto={proyectoSeleccionado}
-          volverALista={() => setProyectoSeleccionado(null)}
-        />
+<div className="lista" style={{ marginTop: '20px' }}>
+  {proyectos.map((proyecto) => (
+    <ProyectoCard
+      key={proyecto.id}
+      proyecto={proyecto}
+      manejarEliminar={manejarEliminar}
+    />
+  ))}
+</div>
 
-      ) : (
-        <>
-          {/* Formulario y Buscador */}
-          <FormularioProyecto alAgregar={agregarNuevoProyecto} />
+      
+      
 
-          <div className="buscador" style={{ marginTop: '20px' }}>
-            <input
-              type="text"
-              placeholder="Buscar proyecto por titulo"
-              value={busqueda}
-              onChange={manejarBusqueda}
-            />
-          </div>
-
-          {/* Refactorizacion del map con Props */}
-          <div className="lista" style={{ marginTop: '20px' }}>
-            {proyectos.map((proyecto) => (
-              <ProyectoCard
-                key={proyecto.id}
-                proyecto={proyecto}
-                manejarEliminar={manejarEliminar}
-                manejarVerDetalle={setProyectoSeleccionado}
-              />
-            ))}
-          </div>
-        </>
-      )}
     </main>
   )
 }

@@ -24,16 +24,65 @@ const PerfilUsuario = () => {
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <Paper elevation={3} className="profilePaper" sx={{ width: '100%', maxWidth: 420, p: 2 }}>
           <List>
-            <ListItem disablePadding>
-              <ListItemText primary="Nombre" secondary="María González" />
+            <ListItem disablePadding sx={{ mb: 1 }}>
+              {enEdicion ? (
+                <TextField
+                  label="Nombre"
+                  value={nombre}
+                  onChange={(e) => setNombre(e.target.value)}
+                  fullWidth
+                  size="small"
+                />
+              ) : (
+                <ListItemText primary="Nombre" secondary={usuario?.nombre} />
+              )}
             </ListItem>
-            <ListItem disablePadding>
-              <ListItemText primary="Rol" secondary="Docente de Matemáticas" />
+
+            <ListItem disablePadding sx={{ mb: 1 }}>
+              {enEdicion ? (
+                <TextField
+                  label="Rol"
+                  value={rol}
+                  onChange={(e) => setRol(e.target.value)}
+                  fullWidth
+                  size="small"
+                />
+              ) : (
+                <ListItemText primary="Rol" secondary={usuario?.rol} />
+              )}
             </ListItem>
-            <ListItem disablePadding>
-              <ListItemText primary="Institución" secondary="Escuela Secundaria Nº 8" />
+
+            <ListItem disablePadding sx={{ mb: 1 }}>
+              {enEdicion ? (
+                <TextField
+                  label="Institución"
+                  value={institucion}
+                  onChange={(e) => setInstitucion(e.target.value)}
+                  fullWidth
+                  size="small"
+                />
+              ) : (
+                <ListItemText primary="Institución" secondary={usuario?.institucion} />
+              )}
             </ListItem>
           </List>
+
+          <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1, mt: 2 }}>
+            {enEdicion ? (
+              <>
+                <Button variant="outlined" onClick={() => setEnEdicion(false)}>
+                  Cancelar
+                </Button>
+                <Button variant="contained" onClick={handleGuardar}>
+                  Guardar
+                </Button>
+              </>
+            ) : (
+              <Button variant="contained" onClick={() => setEnEdicion(true)}>
+                Editar Perfil
+              </Button>
+            )}
+          </Box>
         </Paper>
       </Box>
     </Container>

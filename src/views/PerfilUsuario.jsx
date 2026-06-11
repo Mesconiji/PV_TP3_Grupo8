@@ -67,6 +67,10 @@ const PerfilUsuario = () => {
             </ListItem>
 
             <ListItem disablePadding sx={{ mb: 1 }}>
+              <ListItemText primary="DNI" secondary={usuario.dni || 'No definido'} />
+            </ListItem>
+
+            <ListItem disablePadding sx={{ mb: 1 }}>
               {enEdicion ? (
                 <TextField
                   label="Institución"

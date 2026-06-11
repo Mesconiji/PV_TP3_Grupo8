@@ -1,13 +1,20 @@
-﻿import { Box } from '@mui/material'
+﻿import { useState } from 'react'
+import { Box } from '@mui/material'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import LoginCard from '../components/LoginCard.jsx'
 import { useAuth } from '../hook/useAuth.jsx'
+import proyectoService from '../services/proyectoService'
 
 const Dashboard = () => {
   const { auth } = useAuth()
+  const proyectos = proyectoService.obtenerProyectos()
+  const [totalProyectos] = useState(proyectos.length)
+  const [proyectosActivos] = useState(
+    proyectos.filter(p => p.estado === 'Activo').length
+  )
 
   return (
     <Container maxWidth="lg" className="dashboardContainer">
@@ -31,7 +38,7 @@ const Dashboard = () => {
                     Total de proyectos
                   </Typography>
                   <Typography variant="h3" component="p">
-                    12
+                    {totalProyectos}
                   </Typography>
                   <Typography variant="body2" color="text.secondary" className="metricText">
                     Proyectos publicados en el sistema.
@@ -47,7 +54,7 @@ const Dashboard = () => {
                     Proyectos en curso
                   </Typography>
                   <Typography variant="h3" component="p">
-                    5
+                    {proyectosActivos}
                   </Typography>
                   <Typography variant="body2" color="text.secondary" className="metricText">
                     Proyectos con tutorías activas actualmente.

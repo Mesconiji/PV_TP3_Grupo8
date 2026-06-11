@@ -95,6 +95,15 @@ const proyectoService = (() => {
         }
     ];
 
+    const STORAGE_PROYECTOS = 'proyectos_lista'
+
+    try {
+        const almacenados = localStorage.getItem(STORAGE_PROYECTOS)
+        if (almacenados) proyectos = JSON.parse(almacenados)
+    } catch {
+        /* ignore */
+    }
+
     const obtenerProyectos = () => {
 
         return proyectos
@@ -117,6 +126,7 @@ const proyectoService = (() => {
             ...nuevoProyecto,
             visible: true
         });
+        try { localStorage.setItem(STORAGE_PROYECTOS, JSON.stringify(proyectos)) } catch { /* ignore */ }
 
     };
 
@@ -129,6 +139,7 @@ const proyectoService = (() => {
         if (proyecto) {
 
             proyecto.visible = false;
+            try { localStorage.setItem(STORAGE_PROYECTOS, JSON.stringify(proyectos)) } catch { /* ignore */ }
 
         }
 

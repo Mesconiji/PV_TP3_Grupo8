@@ -203,3 +203,26 @@ a.btn--eliminar:active {
 }
 .badge-teal { background: #20c997; color: #fff; }
 .badge-gray { background: #6c757d; color: #fff; }
+
+.formProyecto {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.formRow {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.formField {
+    flex: 1;
+    min-width: 150px;
+}
+
+.formSubmit {
+    align-self: flex-start;
+}

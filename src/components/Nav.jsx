@@ -2,46 +2,8 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { Box, Button } from '@mui/material';
 import { useAuth } from '../hook/useAuth';
 
-const estilosNav = {
-  display: 'flex',
-  gap: 2,
-  justifyContent: 'center',
-  marginTop: 1
-};
-
-const estilosLink = {
-  textDecoration: 'none',
-  outline: 'none'
-};
-
-const estilosBoton = {
-  color: 'white',
-  borderColor: 'transparent',
-  boxShadow: 'none',
-  '&.MuiButton-outlined': {
-    borderColor: 'white',
-    '&:hover': {
-      backgroundColor: 'rgba(255,255,255,0.08)'
-    }
-  },
-  '&:hover': {
-    backgroundColor: 'rgba(255, 255, 255, 0.06)'
-  }
-};
-
-const estilosBotonLogout = {
-  color: 'white',
-  backgroundColor: '#c0392b',
-  marginLeft: 2,
-  '&:hover': {
-    backgroundColor: '#a93226'
-  }
-};
-
 const Nav = () => {
-
   const { auth, logout } = useAuth();
-
   const navigate = useNavigate();
 
   const manejarLogout = () => {
@@ -50,28 +12,27 @@ const Nav = () => {
   };
 
   return (
-    <Box component="nav" sx={estilosNav}>
+    <Box component="nav" className="navBar">
 
-      {/* Inicio siempre visible */}
-      <NavLink to="/dashboard" end style={estilosLink}>
+      <NavLink to="/dashboard" end className="navLink">
         {({ isActive }) => (
-          <Button sx={estilosBoton} variant={isActive ? 'outlined' : 'text'}>
+          <Button className="navButton" variant={isActive ? 'outlined' : 'text'}>
             Inicio
           </Button>
         )}
       </NavLink>
 
-      <NavLink to="/proyectos" style={estilosLink}>
+      <NavLink to="/proyectos" className="navLink">
         {({ isActive }) => (
-          <Button sx={estilosBoton} variant={isActive ? 'outlined' : 'text'}>
+          <Button className="navButton" variant={isActive ? 'outlined' : 'text'}>
             Explorar Tutorías
           </Button>
         )}
       </NavLink>
 
-      <NavLink to="/perfil" style={estilosLink}>
+      <NavLink to="/perfil" className="navLink">
         {({ isActive }) => (
-          <Button sx={estilosBoton} variant={isActive ? 'outlined' : 'text'}>
+          <Button className="navButton" variant={isActive ? 'outlined' : 'text'}>
             Mi Perfil
           </Button>
         )}
@@ -80,7 +41,7 @@ const Nav = () => {
       {auth.estaLogeado && (
         <Button
           variant="contained"
-          sx={estilosBotonLogout}
+          className="navButton navButtonLogout"
           onClick={manejarLogout}
         >
           Cerrar Sesión

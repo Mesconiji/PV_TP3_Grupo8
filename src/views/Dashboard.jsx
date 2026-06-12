@@ -28,46 +28,44 @@ const Dashboard = () => {
         </Typography>
       </Box>
 
-      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '2fr 1.2fr' }, gap: 3, alignItems: 'start' }}>
-        <Box>
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3, justifyContent: 'center' }}>
-            <Box sx={{ width: '100%', maxWidth: 420 }}>
-              <Card elevation={3} className="metricCard">
-                <CardContent sx={{ textAlign: 'center', py: 4 }}>
-                  <Typography variant="subtitle2" color="text.secondary" gutterBottom>
-                    Total de proyectos
-                  </Typography>
-                  <Typography variant="h3" component="p">
-                    {totalProyectos}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary" className="metricText">
-                    Proyectos publicados en el sistema.
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Box>
+      <Box className="dashboardGrid">
+        <Box className="dashboardMetrics">
+          <Box className="metricCardWrapper">
+            <Card elevation={3} className="metricCard">
+              <CardContent className="metricCardContent">
+                <Typography variant="subtitle2" color="text.secondary" gutterBottom>
+                  Total de proyectos
+                </Typography>
+                <Typography variant="h3" component="p">
+                  {totalProyectos}
+                </Typography>
+                <Typography variant="body2" color="text.secondary" className="metricText">
+                  Proyectos publicados en el sistema.
+                </Typography>
+              </CardContent>
+            </Card>
+          </Box>
 
-            <Box sx={{ width: '100%', maxWidth: 420 }}>
-              <Card elevation={3} className="metricCard">
-                <CardContent sx={{ textAlign: 'center', py: 4 }}>
-                  <Typography variant="subtitle2" color="text.secondary" gutterBottom>
-                    Proyectos en curso
-                  </Typography>
-                  <Typography variant="h3" component="p">
-                    {proyectosActivos}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary" className="metricText">
-                    Proyectos con tutorías activas actualmente.
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Box>
+          <Box className="metricCardWrapper">
+            <Card elevation={3} className="metricCard">
+              <CardContent className="metricCardContent">
+                <Typography variant="subtitle2" color="text.secondary" gutterBottom>
+                  Proyectos en curso
+                </Typography>
+                <Typography variant="h3" component="p">
+                  {proyectosActivos}
+                </Typography>
+                <Typography variant="body2" color="text.secondary" className="metricText">
+                  Proyectos con tutorías activas actualmente.
+                </Typography>
+              </CardContent>
+            </Card>
           </Box>
 
           {auth?.estaLogeado && (
-            <Box sx={{ mt: 4 }}>
+            <Box className="dashboardWelcome">
               <Card elevation={3} className="metricCard">
-                <CardContent sx={{ textAlign: 'center', py: 4 }}>
+                <CardContent className="metricCardContent">
                   <Typography variant="h6" gutterBottom>
                     Hola, {auth.usuario?.nombre}
                   </Typography>

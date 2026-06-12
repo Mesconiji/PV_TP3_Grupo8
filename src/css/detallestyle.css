@@ -37,3 +37,65 @@ a {
 button:focus {
     outline: 2px solid red;
 }
+
+.detailCard {
+    width: 100%;
+    padding: 1.5rem;
+}
+
+.detailNotFound {
+    text-align: center;
+}
+
+.detailHeader {
+    margin-bottom: 1rem;
+}
+
+.detailTitle {
+    text-align: center;
+}
+
+.detailMeta {
+    margin-bottom: 1rem;
+}
+
+.detailDescription {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.detailSection {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.detailList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.detailListItem {
+    justify-content: center;
+}
+
+.detailLink {
+    color: var(--color-secundario);
+    text-decoration: none;
+}
+
+.detailTeam {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.detailTeamMember {
+    text-align: center;
+}
+
+.detailBackButton {
+    margin-top: 0.5rem;
+}

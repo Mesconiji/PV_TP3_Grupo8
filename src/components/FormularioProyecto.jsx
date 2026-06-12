@@ -1,5 +1,5 @@
 ﻿import { useState } from 'react'
-import { Box , TextField , Button , FormControlLabel , Checkbox } from '@mui/material' 
+import { Box, TextField, Button, FormControlLabel, Checkbox } from '@mui/material'
 
 const FormularioProyecto = ({ alAgregar }) => {
 
@@ -40,26 +40,11 @@ const FormularioProyecto = ({ alAgregar }) => {
     })
   }
 
-    const {
-    titulo,
-    categoria,
-    activo,
-    descParrafo1,
-    descParrafo2,
-    nombreRecurso,
-    enlaceRecurso,
-    nombreEquipo,
-    rolEquipo
-  } = nuevoProyecto
+  const { titulo, categoria, activo, descParrafo1, descParrafo2, nombreRecurso, enlaceRecurso, nombreEquipo, rolEquipo } = nuevoProyecto
 
   return (
-    <Box
-      component="form"
-      onSubmit={manejarSubmit}
-      sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 3 }}
-    >
-
-      <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', alignItems: 'center' }}>
+    <Box component="form" onSubmit={manejarSubmit} className="formProyecto">
+      <Box className="formRow">
         <TextField
           label="Título del proyecto"
           name="titulo"
@@ -67,7 +52,7 @@ const FormularioProyecto = ({ alAgregar }) => {
           onChange={manejarCambio}
           required
           size="small"
-          sx={{ flex: 1, minWidth: 200 }}
+          className="formField"
         />
         <TextField
           label="Categoría"
@@ -76,22 +61,15 @@ const FormularioProyecto = ({ alAgregar }) => {
           onChange={manejarCambio}
           required
           size="small"
-          sx={{ flex: 1, minWidth: 150 }}
+          className="formField"
         />
         <FormControlLabel
-          control={
-            <Checkbox
-              name="activo"
-              checked={activo}
-              onChange={manejarCambio}
-            />
-          }
+          control={<Checkbox name="activo" checked={activo} onChange={manejarCambio} />}
           label="Activo"
         />
       </Box>
 
-
-      <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+      <Box className="formRow">
         <TextField
           label="Descripción (Párrafo 1)"
           name="descParrafo1"
@@ -99,7 +77,7 @@ const FormularioProyecto = ({ alAgregar }) => {
           onChange={manejarCambio}
           required
           size="small"
-          sx={{ flex: 1, minWidth: 200 }}
+          className="formField"
         />
         <TextField
           label="Descripción (Párrafo 2)"
@@ -108,18 +86,18 @@ const FormularioProyecto = ({ alAgregar }) => {
           onChange={manejarCambio}
           required
           size="small"
-          sx={{ flex: 1, minWidth: 200 }}
+          className="formField"
         />
       </Box>
 
-      <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+      <Box className="formRow">
         <TextField
           label="Nombre del recurso"
           name="nombreRecurso"
           value={nombreRecurso}
           onChange={manejarCambio}
           size="small"
-          sx={{ flex: 1, minWidth: 200 }}
+          className="formField"
         />
         <TextField
           label="Enlace del recurso"
@@ -127,18 +105,18 @@ const FormularioProyecto = ({ alAgregar }) => {
           value={enlaceRecurso}
           onChange={manejarCambio}
           size="small"
-          sx={{ flex: 1, minWidth: 200 }}
+          className="formField"
         />
       </Box>
 
-      <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+      <Box className="formRow">
         <TextField
           label="Nombre del integrante"
           name="nombreEquipo"
           value={nombreEquipo}
           onChange={manejarCambio}
           size="small"
-          sx={{ flex: 1, minWidth: 200 }}
+          className="formField"
         />
         <TextField
           label="Rol del integrante"
@@ -146,14 +124,13 @@ const FormularioProyecto = ({ alAgregar }) => {
           value={rolEquipo}
           onChange={manejarCambio}
           size="small"
-          sx={{ flex: 1, minWidth: 200 }}
+          className="formField"
         />
       </Box>
 
-      <Button type="submit" variant="contained">
+      <Button type="submit" variant="contained" className="formSubmit">
         Agregar proyecto
       </Button>
-
     </Box>
   )
 }

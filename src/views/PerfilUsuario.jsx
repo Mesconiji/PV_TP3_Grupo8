@@ -24,9 +24,16 @@ const PerfilUsuario = () => {
     setEnEdicion(false)
   }
 
+  const campos = [
+    { key: 'nombre', label: 'Nombre', value: nombre, setter: setNombre, fallback: 'No definido', editable: true },
+    { key: 'rol', label: 'Rol', value: rol, setter: setRol, fallback: 'No definido', editable: true },
+    { key: 'dni', label: 'DNI', value: usuario.dni || 'No definido', editable: false },
+    { key: 'institucion', label: 'Institución', value: institucion, setter: setInstitucion, fallback: 'No definida', editable: true }
+  ]
+
   return (
     <Container maxWidth="lg" className="profileContainer">
-      <Box sx={{ textAlign: 'center', mb: 3 }}>
+      <Box className="profileHeader">
         <Typography variant="h4" component="h1" gutterBottom>
           Perfil de Usuario
         </Typography>
@@ -35,57 +42,27 @@ const PerfilUsuario = () => {
         </Typography>
       </Box>
 
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Paper elevation={3} className="profilePaper" sx={{ width: '100%', maxWidth: 420, p: 2 }}>
+      <Box className="profileCenter">
+        <Paper elevation={3} className="profilePaper">
           <List>
-            <ListItem disablePadding sx={{ mb: 1 }}>
-              {enEdicion ? (
-                <TextField
-                  label="Nombre"
-                  value={nombre}
-                  onChange={(e) => setNombre(e.target.value)}
-                  fullWidth
-                  size="small"
-                />
-              ) : (
-                <ListItemText primary="Nombre" secondary={usuario.nombre || 'No definido'} />
-              )}
-            </ListItem>
-
-            <ListItem disablePadding sx={{ mb: 1 }}>
-              {enEdicion ? (
-                <TextField
-                  label="Rol"
-                  value={rol}
-                  onChange={(e) => setRol(e.target.value)}
-                  fullWidth
-                  size="small"
-                />
-              ) : (
-                <ListItemText primary="Rol" secondary={usuario.rol || 'No definido'} />
-              )}
-            </ListItem>
-
-            <ListItem disablePadding sx={{ mb: 1 }}>
-              <ListItemText primary="DNI" secondary={usuario.dni || 'No definido'} />
-            </ListItem>
-
-            <ListItem disablePadding sx={{ mb: 1 }}>
-              {enEdicion ? (
-                <TextField
-                  label="Institución"
-                  value={institucion}
-                  onChange={(e) => setInstitucion(e.target.value)}
-                  fullWidth
-                  size="small"
-                />
-              ) : (
-                <ListItemText primary="Institución" secondary={usuario.institucion || 'No definida'} />
-              )}
-            </ListItem>
+            {campos.map(({ key, label, value, setter, fallback, editable }) => (
+              <ListItem key={key} disablePadding className="profileField">
+                {enEdicion && editable ? (
+                  <TextField
+                    label={label}
+                    value={value}
+                    onChange={(e) => setter(e.target.value)}
+                    fullWidth
+                    size="small"
+                  />
+                ) : (
+                  <ListItemText primary={label} secondary={value || fallback} />
+                )}
+              </ListItem>
+            ))}
           </List>
 
-          <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1, mt: 2 }}>
+          <Box className="profileActions">
             {enEdicion ? (
               <>
                 <Button variant="outlined" onClick={() => setEnEdicion(false)}>

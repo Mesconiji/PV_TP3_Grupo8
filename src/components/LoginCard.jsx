@@ -18,14 +18,14 @@ const LoginCard = () => {
   const manejarSubmit = (event) => {
     event.preventDefault()
     setError('')
-
-    const exito = login(form)
-    if (exito) {
-      navigate('/dashboard')
-      return
-    }
-
-    setError('Usuario o contraseña incorrectos. Intenta nuevamente.')
+    ;(async () => {
+      const exito = await login(form)
+      if (exito) {
+        navigate('/dashboard')
+        return
+      }
+      setError('Usuario o contraseña incorrectos. Intenta nuevamente.')
+    })()
   }
 
   const [showRegister, setShowRegister] = useState(false)
@@ -61,10 +61,13 @@ const LoginCard = () => {
       setSuccess('Se registró correctamente')
       setError('')
       // limpiar formulario mínimo
+      // capturar credenciales antes de limpiar
+      const savedUsername = regForm.username
+      const savedPassword = regForm.password
       setRegForm({ username: '', password: '', nombre: '', dni: '', institucion: 'Escuela de Minas' })
       // intentar loguear automáticamente tras breve retraso
-      setTimeout(() => {
-        const exito = login({ usuario: regForm.username, password: regForm.password })
+      setTimeout(async () => {
+        const exito = await login({ usuario: savedUsername, password: savedPassword })
         if (exito) navigate('/dashboard')
       }, 800)
       return

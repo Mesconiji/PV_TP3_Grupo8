@@ -10,7 +10,7 @@ const ListaProyectos = () => {
   const [proyectos, setProyectos] = useState(proyectoService.obtenerProyectos())
   const [proyectosFiltrados, setProyectosFiltrados] = useState(proyectoService.obtenerProyectos())
   const [busqueda, setBusqueda] = useState('')
-  const [fechaHora, setFechaHora] = useState(null)
+  const [fechaHora, setFechaHora] = useState(() => sessionStorage.getItem('ultimaActualizacion') || null)
 
   const esMontajeInicial = useRef(proyectos)
 
@@ -30,6 +30,7 @@ const ListaProyectos = () => {
       }) +
       ' hs.'
 
+    sessionStorage.setItem('ultimaActualizacion', fechaFormateada)
     setFechaHora(fechaFormateada)
   }, [proyectos])
 

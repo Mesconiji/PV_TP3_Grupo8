@@ -17,14 +17,14 @@ const Login = () => {
   const manejarSubmit = (event) => {
     event.preventDefault()
     setError('')
-
-    const exito = login(form)
-    if (exito) {
-      navigate('/dashboard')
-      return
-    }
-
-    setError('Usuario o contraseña incorrectos. Intenta nuevamente.')
+    ;(async () => {
+      const exito = await login(form)
+      if (exito) {
+        navigate('/dashboard')
+        return
+      }
+      setError('Usuario o contraseña incorrectos. Intenta nuevamente.')
+    })()
   }
 
   return (
